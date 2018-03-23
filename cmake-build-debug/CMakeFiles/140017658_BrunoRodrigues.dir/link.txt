@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/140017658_BrunoRodrigues.dir/src/main.cpp.o CMakeFiles/140017658_BrunoRodrigues.dir/src/Game.cpp.o CMakeFiles/140017658_BrunoRodrigues.dir/src/State.cpp.o CMakeFiles/140017658_BrunoRodrigues.dir/src/Sprite.cpp.o CMakeFiles/140017658_BrunoRodrigues.dir/src/Music.cpp.o  -o 140017658_BrunoRodrigues -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer 
