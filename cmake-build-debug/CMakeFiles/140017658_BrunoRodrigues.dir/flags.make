@@ -6,5 +6,5 @@ CXX_FLAGS = -g   -std=gnu++11
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1/include -I/usr/include/SDL2 
+CXX_INCLUDES = -I/home/bruno/Woody/IDJ-engine/include -I/usr/include/SDL2 
 

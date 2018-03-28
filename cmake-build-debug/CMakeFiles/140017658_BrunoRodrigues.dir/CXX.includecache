@@ -15,6 +15,10 @@ State.h
 ../include/Music.h
 SDL_include.h
 ../include/SDL_include.h
+iostream
+-
+
+../include/Rect.h
 
 ../include/SDL_include.h
 SDL2/SDL.h
@@ -61,6 +65,8 @@ SDL2/SDL_net.h
 ../include/Sprite.h
 SDL_include.h
 ../include/SDL_include.h
+iostream
+-
 
 ../include/State.h
 SDL_include.h
@@ -70,35 +76,37 @@ Sprite.h
 Music.h
 ../include/Music.h
 
-/home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1/src/Game.cpp
-Game.h
-/home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1/src/Game.h
-iostream
--
+../include/Vec2.h
 
-/home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1/src/Music.cpp
+/home/bruno/Woody/IDJ-engine/src/Game.cpp
+Game.h
+/home/bruno/Woody/IDJ-engine/src/Game.h
+
+/home/bruno/Woody/IDJ-engine/src/Music.cpp
 Music.h
-/home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1/src/Music.h
-iostream
--
+/home/bruno/Woody/IDJ-engine/src/Music.h
 
-/home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1/src/Sprite.cpp
+/home/bruno/Woody/IDJ-engine/src/Rect.cpp
+Rect.h
+/home/bruno/Woody/IDJ-engine/src/Rect.h
+
+/home/bruno/Woody/IDJ-engine/src/Sprite.cpp
 Game.h
 -
-iostream
--
-Sprite.h
-/home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1/src/Sprite.h
 
-/home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1/src/State.cpp
+/home/bruno/Woody/IDJ-engine/src/State.cpp
 State.h
-/home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1/src/State.h
-Sprite.h
-/home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1/src/Sprite.h
+/home/bruno/Woody/IDJ-engine/src/State.h
 
-/home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1/src/main.cpp
+/home/bruno/Woody/IDJ-engine/src/Vec2.cpp
+cmath
+-
+Vec2.h
+/home/bruno/Woody/IDJ-engine/src/Vec2.h
+
+/home/bruno/Woody/IDJ-engine/src/main.cpp
 iostream
 -
 Game.h
-/home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1/src/Game.h
+/home/bruno/Woody/IDJ-engine/src/Game.h
 

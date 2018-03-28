@@ -1,0 +1,3 @@
+.O que fazer com o ClipRect do Sprite, depois que temos agora o GameObject?
+.O que fazer exatamente fazer com o destrutor do Component? (no constructor, eh soh pra passar o associated?)
+.O que fazer exatamente com o Update e com o Is?

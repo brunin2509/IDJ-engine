@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6"/>
 	<Project>
-		<Option title="140017658_T1"/>
+		<Option title="140017658_IDJ"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
 		<Option virtualFolders="CMake Files\;"/>
@@ -88,6 +88,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/bruno/Woody/IDJ-engine/include/Component.h">
+			<Option target="140017658_BrunoRodrigues"/>
+		</Unit>
 		<Unit filename="/home/bruno/Woody/IDJ-engine/include/Game.h">
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
@@ -112,10 +115,13 @@
 		<Unit filename="/home/bruno/Woody/IDJ-engine/src/Component.cpp">
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
-		<Unit filename="/home/bruno/Woody/IDJ-engine/src/Component.h">
+		<Unit filename="/home/bruno/Woody/IDJ-engine/src/Game.cpp">
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
-		<Unit filename="/home/bruno/Woody/IDJ-engine/src/Game.cpp">
+		<Unit filename="/home/bruno/Woody/IDJ-engine/src/GameObject.cpp">
+			<Option target="140017658_BrunoRodrigues"/>
+		</Unit>
+		<Unit filename="/home/bruno/Woody/IDJ-engine/src/GameObject.h">
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
 		<Unit filename="/home/bruno/Woody/IDJ-engine/src/Music.cpp">

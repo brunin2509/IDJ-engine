@@ -4,6 +4,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/140017658_BrunoRodrigues.dir/src/State.cpp.o"
   "CMakeFiles/140017658_BrunoRodrigues.dir/src/Sprite.cpp.o"
   "CMakeFiles/140017658_BrunoRodrigues.dir/src/Music.cpp.o"
+  "CMakeFiles/140017658_BrunoRodrigues.dir/src/Rect.cpp.o"
+  "CMakeFiles/140017658_BrunoRodrigues.dir/src/Vec2.cpp.o"
+  "CMakeFiles/140017658_BrunoRodrigues.dir/src/Component.cpp.o"
+  "CMakeFiles/140017658_BrunoRodrigues.dir/src/GameObject.cpp.o"
   "140017658_BrunoRodrigues.pdb"
   "140017658_BrunoRodrigues"
 )

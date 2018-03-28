@@ -12,6 +12,9 @@ CMakeFiles/140017658_BrunoRodrigues.dir/src/Music.cpp.o: ../include/Music.h
 CMakeFiles/140017658_BrunoRodrigues.dir/src/Music.cpp.o: ../include/SDL_include.h
 CMakeFiles/140017658_BrunoRodrigues.dir/src/Music.cpp.o: ../src/Music.cpp
 
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Rect.cpp.o: ../include/Rect.h
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Rect.cpp.o: ../src/Rect.cpp
+
 CMakeFiles/140017658_BrunoRodrigues.dir/src/Sprite.cpp.o: ../include/Game.h
 CMakeFiles/140017658_BrunoRodrigues.dir/src/Sprite.cpp.o: ../include/Music.h
 CMakeFiles/140017658_BrunoRodrigues.dir/src/Sprite.cpp.o: ../include/SDL_include.h
@@ -24,6 +27,9 @@ CMakeFiles/140017658_BrunoRodrigues.dir/src/State.cpp.o: ../include/SDL_include.
 CMakeFiles/140017658_BrunoRodrigues.dir/src/State.cpp.o: ../include/Sprite.h
 CMakeFiles/140017658_BrunoRodrigues.dir/src/State.cpp.o: ../include/State.h
 CMakeFiles/140017658_BrunoRodrigues.dir/src/State.cpp.o: ../src/State.cpp
+
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Vec2.cpp.o: ../include/Vec2.h
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Vec2.cpp.o: ../src/Vec2.cpp
 
 CMakeFiles/140017658_BrunoRodrigues.dir/src/main.cpp.o: ../include/Game.h
 CMakeFiles/140017658_BrunoRodrigues.dir/src/main.cpp.o: ../include/Music.h

@@ -15,6 +15,7 @@
 class State {
 public:
     State();
+
     bool QuitRequested();
     void LoadAssets();
     void Update (float dt);

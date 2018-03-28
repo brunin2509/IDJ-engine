@@ -48,10 +48,10 @@ RM = /home/bruno/Downloads/clion-2017.3.4/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1
+CMAKE_SOURCE_DIR = /home/bruno/Woody/IDJ-engine
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1/cmake-build-debug
+CMAKE_BINARY_DIR = /home/bruno/Woody/IDJ-engine/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1/cmake-build-debug/CMakeFiles /home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles /home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bruno/Dropbox/UnB/Semestre_9/Introducao_ao_Desenvolvimento_de_Jogos/Trabalhos/T1/140017658_T1/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,6 +123,33 @@ depend:
 	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/build
 .PHONY : 140017658_BrunoRodrigues/fast
 
+src/Component.o: src/Component.cpp.o
+
+.PHONY : src/Component.o
+
+# target to build an object file
+src/Component.cpp.o:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Component.cpp.o
+.PHONY : src/Component.cpp.o
+
+src/Component.i: src/Component.cpp.i
+
+.PHONY : src/Component.i
+
+# target to preprocess a source file
+src/Component.cpp.i:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Component.cpp.i
+.PHONY : src/Component.cpp.i
+
+src/Component.s: src/Component.cpp.s
+
+.PHONY : src/Component.s
+
+# target to generate assembly for a file
+src/Component.cpp.s:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Component.cpp.s
+.PHONY : src/Component.cpp.s
+
 src/Game.o: src/Game.cpp.o
 
 .PHONY : src/Game.o
@@ -150,6 +177,33 @@ src/Game.cpp.s:
 	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Game.cpp.s
 .PHONY : src/Game.cpp.s
 
+src/GameObject.o: src/GameObject.cpp.o
+
+.PHONY : src/GameObject.o
+
+# target to build an object file
+src/GameObject.cpp.o:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/GameObject.cpp.o
+.PHONY : src/GameObject.cpp.o
+
+src/GameObject.i: src/GameObject.cpp.i
+
+.PHONY : src/GameObject.i
+
+# target to preprocess a source file
+src/GameObject.cpp.i:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/GameObject.cpp.i
+.PHONY : src/GameObject.cpp.i
+
+src/GameObject.s: src/GameObject.cpp.s
+
+.PHONY : src/GameObject.s
+
+# target to generate assembly for a file
+src/GameObject.cpp.s:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/GameObject.cpp.s
+.PHONY : src/GameObject.cpp.s
+
 src/Music.o: src/Music.cpp.o
 
 .PHONY : src/Music.o
@@ -176,6 +230,33 @@ src/Music.s: src/Music.cpp.s
 src/Music.cpp.s:
 	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Music.cpp.s
 .PHONY : src/Music.cpp.s
+
+src/Rect.o: src/Rect.cpp.o
+
+.PHONY : src/Rect.o
+
+# target to build an object file
+src/Rect.cpp.o:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Rect.cpp.o
+.PHONY : src/Rect.cpp.o
+
+src/Rect.i: src/Rect.cpp.i
+
+.PHONY : src/Rect.i
+
+# target to preprocess a source file
+src/Rect.cpp.i:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Rect.cpp.i
+.PHONY : src/Rect.cpp.i
+
+src/Rect.s: src/Rect.cpp.s
+
+.PHONY : src/Rect.s
+
+# target to generate assembly for a file
+src/Rect.cpp.s:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Rect.cpp.s
+.PHONY : src/Rect.cpp.s
 
 src/Sprite.o: src/Sprite.cpp.o
 
@@ -231,6 +312,33 @@ src/State.cpp.s:
 	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/State.cpp.s
 .PHONY : src/State.cpp.s
 
+src/Vec2.o: src/Vec2.cpp.o
+
+.PHONY : src/Vec2.o
+
+# target to build an object file
+src/Vec2.cpp.o:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Vec2.cpp.o
+.PHONY : src/Vec2.cpp.o
+
+src/Vec2.i: src/Vec2.cpp.i
+
+.PHONY : src/Vec2.i
+
+# target to preprocess a source file
+src/Vec2.cpp.i:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Vec2.cpp.i
+.PHONY : src/Vec2.cpp.i
+
+src/Vec2.s: src/Vec2.cpp.s
+
+.PHONY : src/Vec2.s
+
+# target to generate assembly for a file
+src/Vec2.cpp.s:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Vec2.cpp.s
+.PHONY : src/Vec2.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -267,18 +375,30 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... 140017658_BrunoRodrigues"
+	@echo "... src/Component.o"
+	@echo "... src/Component.i"
+	@echo "... src/Component.s"
 	@echo "... src/Game.o"
 	@echo "... src/Game.i"
 	@echo "... src/Game.s"
+	@echo "... src/GameObject.o"
+	@echo "... src/GameObject.i"
+	@echo "... src/GameObject.s"
 	@echo "... src/Music.o"
 	@echo "... src/Music.i"
 	@echo "... src/Music.s"
+	@echo "... src/Rect.o"
+	@echo "... src/Rect.i"
+	@echo "... src/Rect.s"
 	@echo "... src/Sprite.o"
 	@echo "... src/Sprite.i"
 	@echo "... src/Sprite.s"
 	@echo "... src/State.o"
 	@echo "... src/State.i"
 	@echo "... src/State.s"
+	@echo "... src/Vec2.o"
+	@echo "... src/Vec2.i"
+	@echo "... src/Vec2.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

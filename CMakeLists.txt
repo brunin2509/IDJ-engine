@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.9)
-project(140017658_T1)
+project(140017658_IDJ)
 
 set(CMAKE_CXX_STANDARD 11)
 
@@ -11,4 +11,4 @@ include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
 
 include_directories(BEFORE include)
 
-add_executable(140017658_BrunoRodrigues src/main.cpp include/SDL_include.h src/Game.cpp include/Game.h src/State.cpp include/State.h src/Sprite.cpp include/Sprite.h src/Music.cpp include/Music.h)
+add_executable(140017658_BrunoRodrigues src/main.cpp include/SDL_include.h src/Game.cpp include/Game.h src/State.cpp include/State.h src/Sprite.cpp include/Sprite.h src/Music.cpp include/Music.h src/Rect.cpp include/Rect.h src/Vec2.cpp include/Vec2.h src/Component.cpp include/Component.h src/GameObject.cpp include/GameObject.h)
