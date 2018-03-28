@@ -8,6 +8,7 @@
 #define INC_140017658_T1_STATE_H
 
 #define INCLUDE_SDL
+#include <memory>
 #include "SDL_include.h"
 #include "Sprite.h"
 #include "Music.h"
@@ -15,6 +16,7 @@
 class State {
 public:
     State();
+    ~State();
 
     bool QuitRequested();
     void LoadAssets();
@@ -22,9 +24,13 @@ public:
     void Render();
 
 private:
+    void Input();
+    void AddObject(int mouseX, int mouseY);
+
     Sprite bg;
     Music music;
     bool quitRequested;
+    std::vector<std::unique_ptr<GameObject>> objectArray;
 };
 
 

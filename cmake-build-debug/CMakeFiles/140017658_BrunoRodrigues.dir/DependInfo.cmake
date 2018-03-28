@@ -5,10 +5,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/bruno/Woody/IDJ-engine/src/Component.cpp" "/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles/140017658_BrunoRodrigues.dir/src/Component.cpp.o"
+  "/home/bruno/Woody/IDJ-engine/src/Face.cpp" "/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o"
   "/home/bruno/Woody/IDJ-engine/src/Game.cpp" "/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles/140017658_BrunoRodrigues.dir/src/Game.cpp.o"
   "/home/bruno/Woody/IDJ-engine/src/GameObject.cpp" "/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles/140017658_BrunoRodrigues.dir/src/GameObject.cpp.o"
   "/home/bruno/Woody/IDJ-engine/src/Music.cpp" "/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles/140017658_BrunoRodrigues.dir/src/Music.cpp.o"
   "/home/bruno/Woody/IDJ-engine/src/Rect.cpp" "/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles/140017658_BrunoRodrigues.dir/src/Rect.cpp.o"
+  "/home/bruno/Woody/IDJ-engine/src/Sound.cpp" "/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o"
   "/home/bruno/Woody/IDJ-engine/src/Sprite.cpp" "/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles/140017658_BrunoRodrigues.dir/src/Sprite.cpp.o"
   "/home/bruno/Woody/IDJ-engine/src/State.cpp" "/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles/140017658_BrunoRodrigues.dir/src/State.cpp.o"
   "/home/bruno/Woody/IDJ-engine/src/Vec2.cpp" "/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles/140017658_BrunoRodrigues.dir/src/Vec2.cpp.o"

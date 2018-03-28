@@ -8,6 +8,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/140017658_BrunoRodrigues.dir/src/Vec2.cpp.o"
   "CMakeFiles/140017658_BrunoRodrigues.dir/src/Component.cpp.o"
   "CMakeFiles/140017658_BrunoRodrigues.dir/src/GameObject.cpp.o"
+  "CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o"
+  "CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o"
   "140017658_BrunoRodrigues.pdb"
   "140017658_BrunoRodrigues"
 )

@@ -94,6 +94,9 @@
 		<Unit filename="/home/bruno/Woody/IDJ-engine/include/Game.h">
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
+		<Unit filename="/home/bruno/Woody/IDJ-engine/include/GameObject.h">
+			<Option target="140017658_BrunoRodrigues"/>
+		</Unit>
 		<Unit filename="/home/bruno/Woody/IDJ-engine/include/Music.h">
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
@@ -101,6 +104,9 @@
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
 		<Unit filename="/home/bruno/Woody/IDJ-engine/include/SDL_include.h">
+			<Option target="140017658_BrunoRodrigues"/>
+		</Unit>
+		<Unit filename="/home/bruno/Woody/IDJ-engine/include/Sound.h">
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
 		<Unit filename="/home/bruno/Woody/IDJ-engine/include/Sprite.h">
@@ -115,19 +121,25 @@
 		<Unit filename="/home/bruno/Woody/IDJ-engine/src/Component.cpp">
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
+		<Unit filename="/home/bruno/Woody/IDJ-engine/src/Face.cpp">
+			<Option target="140017658_BrunoRodrigues"/>
+		</Unit>
+		<Unit filename="/home/bruno/Woody/IDJ-engine/src/Face.h">
+			<Option target="140017658_BrunoRodrigues"/>
+		</Unit>
 		<Unit filename="/home/bruno/Woody/IDJ-engine/src/Game.cpp">
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
 		<Unit filename="/home/bruno/Woody/IDJ-engine/src/GameObject.cpp">
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
-		<Unit filename="/home/bruno/Woody/IDJ-engine/src/GameObject.h">
-			<Option target="140017658_BrunoRodrigues"/>
-		</Unit>
 		<Unit filename="/home/bruno/Woody/IDJ-engine/src/Music.cpp">
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
 		<Unit filename="/home/bruno/Woody/IDJ-engine/src/Rect.cpp">
+			<Option target="140017658_BrunoRodrigues"/>
+		</Unit>
+		<Unit filename="/home/bruno/Woody/IDJ-engine/src/Sound.cpp">
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
 		<Unit filename="/home/bruno/Woody/IDJ-engine/src/Sprite.cpp">

@@ -3,7 +3,6 @@
 //
 
 #include <Game.h>
-#include <typeinfo>
 
 using std::cerr;
 
@@ -36,7 +35,7 @@ void Sprite::Open(std::string file) {
 
     SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
 
-    SetClip(0, 0, width, height); // by default, set the clip to hold the whole texture
+    SetClip(0, 0, width, height);
     this->associated.box.w = width;
     this->associated.box.h = height;
 }
@@ -78,7 +77,7 @@ void Sprite::Update(float dt) {
 }
 
 bool Sprite::Is(std::string type) {
-    return typeid(*this).name() == type;
+    return type == "Sprite";
 }
 
 

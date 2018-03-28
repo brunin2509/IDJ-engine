@@ -7,6 +7,4 @@
 Component::Component(GameObject &associated) : associated(associated) {
 }
 
-Component::~Component() {
-    //todo?
-}
+Component::~Component() = default;

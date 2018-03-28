@@ -150,6 +150,33 @@ src/Component.cpp.s:
 	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Component.cpp.s
 .PHONY : src/Component.cpp.s
 
+src/Face.o: src/Face.cpp.o
+
+.PHONY : src/Face.o
+
+# target to build an object file
+src/Face.cpp.o:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o
+.PHONY : src/Face.cpp.o
+
+src/Face.i: src/Face.cpp.i
+
+.PHONY : src/Face.i
+
+# target to preprocess a source file
+src/Face.cpp.i:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.i
+.PHONY : src/Face.cpp.i
+
+src/Face.s: src/Face.cpp.s
+
+.PHONY : src/Face.s
+
+# target to generate assembly for a file
+src/Face.cpp.s:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.s
+.PHONY : src/Face.cpp.s
+
 src/Game.o: src/Game.cpp.o
 
 .PHONY : src/Game.o
@@ -257,6 +284,33 @@ src/Rect.s: src/Rect.cpp.s
 src/Rect.cpp.s:
 	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Rect.cpp.s
 .PHONY : src/Rect.cpp.s
+
+src/Sound.o: src/Sound.cpp.o
+
+.PHONY : src/Sound.o
+
+# target to build an object file
+src/Sound.cpp.o:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o
+.PHONY : src/Sound.cpp.o
+
+src/Sound.i: src/Sound.cpp.i
+
+.PHONY : src/Sound.i
+
+# target to preprocess a source file
+src/Sound.cpp.i:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.i
+.PHONY : src/Sound.cpp.i
+
+src/Sound.s: src/Sound.cpp.s
+
+.PHONY : src/Sound.s
+
+# target to generate assembly for a file
+src/Sound.cpp.s:
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.s
+.PHONY : src/Sound.cpp.s
 
 src/Sprite.o: src/Sprite.cpp.o
 
@@ -378,6 +432,9 @@ help:
 	@echo "... src/Component.o"
 	@echo "... src/Component.i"
 	@echo "... src/Component.s"
+	@echo "... src/Face.o"
+	@echo "... src/Face.i"
+	@echo "... src/Face.s"
 	@echo "... src/Game.o"
 	@echo "... src/Game.i"
 	@echo "... src/Game.s"
@@ -390,6 +447,9 @@ help:
 	@echo "... src/Rect.o"
 	@echo "... src/Rect.i"
 	@echo "... src/Rect.s"
+	@echo "... src/Sound.o"
+	@echo "... src/Sound.i"
+	@echo "... src/Sound.s"
 	@echo "... src/Sprite.o"
 	@echo "... src/Sprite.i"
 	@echo "... src/Sprite.s"

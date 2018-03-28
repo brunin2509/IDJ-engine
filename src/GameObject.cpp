@@ -10,6 +10,9 @@ GameObject::GameObject() {
 }
 
 GameObject::~GameObject() {
+    for (auto &component : this->components) {
+        delete component;
+    }
     this->components.clear();
 }
 
@@ -47,7 +50,7 @@ void GameObject::RemoveComponent(Component *cpt) {
 
 Component *GameObject::GetComponent(std::string type) {
     for (auto &component : this->components) {
-        if(typeid(*component).name() == type){
+        if(component->Is(type)){
             return component;
         };
     }

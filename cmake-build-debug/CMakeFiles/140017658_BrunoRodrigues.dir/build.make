@@ -273,6 +273,54 @@ CMakeFiles/140017658_BrunoRodrigues.dir/src/GameObject.cpp.o.provides: CMakeFile
 CMakeFiles/140017658_BrunoRodrigues.dir/src/GameObject.cpp.o.provides.build: CMakeFiles/140017658_BrunoRodrigues.dir/src/GameObject.cpp.o
 
 
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o: CMakeFiles/140017658_BrunoRodrigues.dir/flags.make
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o: ../src/Sound.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o -c /home/bruno/Woody/IDJ-engine/src/Sound.cpp
+
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bruno/Woody/IDJ-engine/src/Sound.cpp > CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.i
+
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bruno/Woody/IDJ-engine/src/Sound.cpp -o CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.s
+
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o.requires:
+
+.PHONY : CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o.requires
+
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o.provides: CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o.requires
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o.provides.build
+.PHONY : CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o.provides
+
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o.provides.build: CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o
+
+
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o: CMakeFiles/140017658_BrunoRodrigues.dir/flags.make
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o: ../src/Face.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o -c /home/bruno/Woody/IDJ-engine/src/Face.cpp
+
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bruno/Woody/IDJ-engine/src/Face.cpp > CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.i
+
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bruno/Woody/IDJ-engine/src/Face.cpp -o CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.s
+
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o.requires:
+
+.PHONY : CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o.requires
+
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o.provides: CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o.requires
+	$(MAKE) -f CMakeFiles/140017658_BrunoRodrigues.dir/build.make CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o.provides.build
+.PHONY : CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o.provides
+
+CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o.provides.build: CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o
+
+
 # Object files for target 140017658_BrunoRodrigues
 140017658_BrunoRodrigues_OBJECTS = \
 "CMakeFiles/140017658_BrunoRodrigues.dir/src/main.cpp.o" \
@@ -283,7 +331,9 @@ CMakeFiles/140017658_BrunoRodrigues.dir/src/GameObject.cpp.o.provides.build: CMa
 "CMakeFiles/140017658_BrunoRodrigues.dir/src/Rect.cpp.o" \
 "CMakeFiles/140017658_BrunoRodrigues.dir/src/Vec2.cpp.o" \
 "CMakeFiles/140017658_BrunoRodrigues.dir/src/Component.cpp.o" \
-"CMakeFiles/140017658_BrunoRodrigues.dir/src/GameObject.cpp.o"
+"CMakeFiles/140017658_BrunoRodrigues.dir/src/GameObject.cpp.o" \
+"CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o" \
+"CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o"
 
 # External object files for target 140017658_BrunoRodrigues
 140017658_BrunoRodrigues_EXTERNAL_OBJECTS =
@@ -297,9 +347,11 @@ CMakeFiles/140017658_BrunoRodrigues.dir/src/GameObject.cpp.o.provides.build: CMa
 140017658_BrunoRodrigues: CMakeFiles/140017658_BrunoRodrigues.dir/src/Vec2.cpp.o
 140017658_BrunoRodrigues: CMakeFiles/140017658_BrunoRodrigues.dir/src/Component.cpp.o
 140017658_BrunoRodrigues: CMakeFiles/140017658_BrunoRodrigues.dir/src/GameObject.cpp.o
+140017658_BrunoRodrigues: CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o
+140017658_BrunoRodrigues: CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o
 140017658_BrunoRodrigues: CMakeFiles/140017658_BrunoRodrigues.dir/build.make
 140017658_BrunoRodrigues: CMakeFiles/140017658_BrunoRodrigues.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable 140017658_BrunoRodrigues"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable 140017658_BrunoRodrigues"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/140017658_BrunoRodrigues.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -316,6 +368,8 @@ CMakeFiles/140017658_BrunoRodrigues.dir/requires: CMakeFiles/140017658_BrunoRodr
 CMakeFiles/140017658_BrunoRodrigues.dir/requires: CMakeFiles/140017658_BrunoRodrigues.dir/src/Vec2.cpp.o.requires
 CMakeFiles/140017658_BrunoRodrigues.dir/requires: CMakeFiles/140017658_BrunoRodrigues.dir/src/Component.cpp.o.requires
 CMakeFiles/140017658_BrunoRodrigues.dir/requires: CMakeFiles/140017658_BrunoRodrigues.dir/src/GameObject.cpp.o.requires
+CMakeFiles/140017658_BrunoRodrigues.dir/requires: CMakeFiles/140017658_BrunoRodrigues.dir/src/Sound.cpp.o.requires
+CMakeFiles/140017658_BrunoRodrigues.dir/requires: CMakeFiles/140017658_BrunoRodrigues.dir/src/Face.cpp.o.requires
 
 .PHONY : CMakeFiles/140017658_BrunoRodrigues.dir/requires
 
