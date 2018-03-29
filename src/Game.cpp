@@ -3,6 +3,7 @@
 //
 
 #include "Game.h"
+#include <ctime>
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 
@@ -19,6 +20,8 @@ Game& Game::GetInstance() {
 }
 
 Game::Game(std::string title, int width, int height) {
+    srand((unsigned int) (time(nullptr)));
+
     if(instance != nullptr){
         cerr << "\n\n EXECUTION ERROR: TRYED TO INSTANCIATE THE GAME, BUT A GAME INSTANCE WAS ALREADY RUNNING \n\n";
         exit(1);

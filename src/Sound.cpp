@@ -27,6 +27,13 @@ void Sound::Play(int times) {
     }
 }
 
+bool Sound::IsPlaying() {
+    if(channel < 0){ // no active channel for this component
+        return false;
+    }
+    return Mix_Playing(channel) != 0;
+}
+
 void Sound::Stop() {
     if(chunk != nullptr){
         Mix_HaltChannel(channel);

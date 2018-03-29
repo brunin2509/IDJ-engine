@@ -6,11 +6,29 @@
 
 #IncludeRegexTransform: 
 
+../include/Component.h
+iostream
+-
+
+../include/Face.h
+Component.h
+../include/Component.h
+
 ../include/Game.h
 SDL_include.h
 ../include/SDL_include.h
 State.h
 ../include/State.h
+
+../include/GameObject.h
+vector
+-
+memory
+-
+Component.h
+../include/Component.h
+Rect.h
+../include/Rect.h
 
 ../include/Music.h
 SDL_include.h
@@ -19,6 +37,8 @@ iostream
 -
 
 ../include/Rect.h
+Vec2.h
+../include/Vec2.h
 
 ../include/SDL_include.h
 SDL2/SDL.h
@@ -61,14 +81,26 @@ SDL2/SDL_net.h
 -
 SDL2/SDL_net.h
 -
+
+../include/Sound.h
+SDL_include.h
+../include/SDL_include.h
+GameObject.h
+../include/GameObject.h
 
 ../include/Sprite.h
 SDL_include.h
 ../include/SDL_include.h
+Component.h
+../include/Component.h
+GameObject.h
+../include/GameObject.h
 iostream
 -
 
 ../include/State.h
+memory
+-
 SDL_include.h
 ../include/SDL_include.h
 Sprite.h
@@ -78,9 +110,27 @@ Music.h
 
 ../include/Vec2.h
 
+/home/bruno/Woody/IDJ-engine/src/Component.cpp
+Component.h
+/home/bruno/Woody/IDJ-engine/src/Component.h
+
+/home/bruno/Woody/IDJ-engine/src/Face.cpp
+Sound.h
+-
+Face.h
+/home/bruno/Woody/IDJ-engine/src/Face.h
+
 /home/bruno/Woody/IDJ-engine/src/Game.cpp
 Game.h
 /home/bruno/Woody/IDJ-engine/src/Game.h
+ctime
+-
+
+/home/bruno/Woody/IDJ-engine/src/GameObject.cpp
+typeinfo
+-
+GameObject.h
+/home/bruno/Woody/IDJ-engine/src/GameObject.h
 
 /home/bruno/Woody/IDJ-engine/src/Music.cpp
 Music.h
@@ -90,11 +140,19 @@ Music.h
 Rect.h
 /home/bruno/Woody/IDJ-engine/src/Rect.h
 
+/home/bruno/Woody/IDJ-engine/src/Sound.cpp
+Sound.h
+/home/bruno/Woody/IDJ-engine/src/Sound.h
+
 /home/bruno/Woody/IDJ-engine/src/Sprite.cpp
 Game.h
 -
 
 /home/bruno/Woody/IDJ-engine/src/State.cpp
+Sound.h
+-
+Face.h
+-
 State.h
 /home/bruno/Woody/IDJ-engine/src/State.h
 

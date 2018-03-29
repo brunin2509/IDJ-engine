@@ -91,6 +91,9 @@
 		<Unit filename="/home/bruno/Woody/IDJ-engine/include/Component.h">
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
+		<Unit filename="/home/bruno/Woody/IDJ-engine/include/Face.h">
+			<Option target="140017658_BrunoRodrigues"/>
+		</Unit>
 		<Unit filename="/home/bruno/Woody/IDJ-engine/include/Game.h">
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
@@ -122,9 +125,6 @@
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
 		<Unit filename="/home/bruno/Woody/IDJ-engine/src/Face.cpp">
-			<Option target="140017658_BrunoRodrigues"/>
-		</Unit>
-		<Unit filename="/home/bruno/Woody/IDJ-engine/src/Face.h">
 			<Option target="140017658_BrunoRodrigues"/>
 		</Unit>
 		<Unit filename="/home/bruno/Woody/IDJ-engine/src/Game.cpp">

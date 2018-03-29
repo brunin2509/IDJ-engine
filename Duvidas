@@ -1,5 +1,13 @@
 .O que fazer com o ClipRect do Sprite, depois que temos agora o GameObject?
     -
+.Transformar Music em component?
+    -
+
+.Como evitar dependencia circular?
+    -https://stackoverflow.com/questions/625799/resolve-build-errors-due-to-circular-dependency-amongst-classes
+    -https://stackoverflow.com/questions/346058/c-class-header-files-organization
+.Como inicializar o bg no state???
+    -bg nao precisa existir mais como propriedade
 .O que fazer exatamente fazer com o destrutor do Component? (no constructor, eh soh pra passar o associated?)
     -default. Aparentemente sim.
 .O que fazer exatamente com o Update e com o Is?

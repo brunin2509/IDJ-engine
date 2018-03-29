@@ -30,3 +30,7 @@ Vec2 Rect::DifferenceBetweenCenters(Rect r2) {
     return this->Center()-r2.Center();
 }
 
+bool Rect::Contains(Vec2 vec) {
+    return vec.x >= x && vec.x <= x+w && vec.y >= y && vec.y <= y+h;
+}
+

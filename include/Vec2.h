@@ -5,8 +5,6 @@
 #ifndef INC_140017658_T1_VEC2_H
 #define INC_140017658_T1_VEC2_H
 
-#include "Rect.h"
-
 class Vec2 {
 public:
     Vec2();
@@ -24,7 +22,6 @@ public:
     float XInclination();
     float InclinationOfDifference(Vec2 v2);
     Vec2 Rotate(float radians);
-    Rect operator+(Rect rect);
 
 };
 

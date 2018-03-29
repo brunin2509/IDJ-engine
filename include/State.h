@@ -27,7 +27,6 @@ private:
     void Input();
     void AddObject(int mouseX, int mouseY);
 
-    Sprite bg;
     Music music;
     bool quitRequested;
     std::vector<std::unique_ptr<GameObject>> objectArray;

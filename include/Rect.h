@@ -20,6 +20,7 @@ public:
     Rect operator+(Vec2 vec);
     Vec2 Center();
     Vec2 DifferenceBetweenCenters(Rect r2);
+    bool Contains(Vec2 vec);
 
 };
 

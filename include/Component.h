@@ -6,11 +6,12 @@
 #define INC_140017658_T1_COMPONENT_H
 
 #include <iostream>
-#include "GameObject.h"
+
+class GameObject;
 
 class Component {
 public:
-    explicit Component(GameObject &associated);
+    explicit Component(GameObject& associated);
     virtual ~Component();
 
     virtual void Update(float dt) = 0;

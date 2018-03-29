@@ -13,13 +13,14 @@ void Face::Damage(int damage) {
     hitpoints -= damage;
 
     if(hitpoints <= 0){
-        associated.RequestDelete(); //todo: isso aqui ta bizarro
 
         auto soundComponent = (Sound*) associated.GetComponent("Sound");
 
-        if(!soundComponent){
+        if(soundComponent){
             soundComponent->Play();
         }
+
+        associated.RequestDelete(); //todo: isso aqui ta bizarro
     }
 }
 

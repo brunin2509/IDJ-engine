@@ -6,7 +6,8 @@
 #define INC_140017658_IDJ_SOUND_H
 
 
-#include <SDL_mixer.h>
+#define INCLUDE_SDL_MIXER
+#include "SDL_include.h"
 #include "GameObject.h"
 
 class Sound: public Component {
@@ -16,6 +17,7 @@ public:
     ~Sound() override;
 
     void Play(int times = 1);
+    bool IsPlaying();
     void Stop();
     void Open(std::string file);
     bool IsOpen();

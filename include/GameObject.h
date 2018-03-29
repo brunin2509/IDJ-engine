@@ -6,6 +6,7 @@
 #define INC_140017658_IDJ_GAMEOBJECT_H
 
 #include <vector>
+#include <memory>
 #include "Component.h"
 #include "Rect.h"
 
@@ -14,7 +15,7 @@ public:
     GameObject();
     ~GameObject();
 
-    Rect box;
+    Rect box{0,0,0,0};
 
     void Update(float dt);
     void Render();

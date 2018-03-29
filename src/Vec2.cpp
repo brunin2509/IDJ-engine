@@ -52,10 +52,6 @@ Vec2 Vec2::Rotate(float radians) {
     return {this->x*std::cos(radians) - this->y*std::sin(radians), this->y*std::cos(radians) + this->x*std::sin(radians)};
 }
 
-Rect Vec2::operator+(Rect rect) {
-    return {rect.x+this->x, rect.y+this->y, rect.w, rect.h};
-}
-
 
 
 
