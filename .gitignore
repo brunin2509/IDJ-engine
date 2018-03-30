@@ -1,0 +1,5 @@
+### IDJ-engine ###
+.idea
+bin/
+dep/
+cmake-build-debug

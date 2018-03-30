@@ -13,6 +13,7 @@ public:
     explicit Face(GameObject& associated);
 
     void Damage(int damage);
+    bool Died();
 
     void Update(float dt) override;
     void Render() override;

@@ -26,7 +26,7 @@ public:
     Component* GetComponent(std::string type);
 
 private:
-    std::vector<Component*> components;
+    std::vector<std::unique_ptr<Component>> components;
     bool isDead;
 };
 

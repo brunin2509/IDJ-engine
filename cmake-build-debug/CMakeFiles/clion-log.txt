@@ -1,4 +1,0 @@
-/home/bruno/Downloads/clion-2017.3.4/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/bruno/Woody/IDJ-engine
--- Configuring done
--- Generating done
--- Build files have been written to: /home/bruno/Woody/IDJ-engine/cmake-build-debug

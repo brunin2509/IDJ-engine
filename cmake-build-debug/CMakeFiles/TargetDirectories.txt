@@ -1,3 +1,0 @@
-/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/bruno/Woody/IDJ-engine/cmake-build-debug/CMakeFiles/140017658_BrunoRodrigues.dir

@@ -20,11 +20,19 @@ void Face::Damage(int damage) {
             soundComponent->Play();
         }
 
-        associated.RequestDelete(); //todo: isso aqui ta bizarro
+        associated.RemoveComponent(associated.GetComponent("Sprite"));
     }
 }
 
 void Face::Update(float dt) {
+    if(Died()){
+        auto soundComponent = (Sound*) associated.GetComponent("Sound");
+
+        if(soundComponent && !soundComponent->IsPlaying()){
+            associated.RequestDelete(); // objeto morre somente se o componente ja tocou o som
+        }
+    }
+
 
 }
 
@@ -34,6 +42,10 @@ void Face::Render() {
 
 bool Face::Is(std::string type) {
     return type == "Face";
+}
+
+bool Face::Died() {
+    return hitpoints <= 0;
 }
 
 
