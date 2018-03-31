@@ -11,4 +11,4 @@ include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
 
 include_directories(BEFORE include)
 
-add_executable(140017658_BrunoRodrigues src/main.cpp include/SDL_include.h src/Game.cpp include/Game.h src/State.cpp include/State.h src/Sprite.cpp include/Sprite.h src/Music.cpp include/Music.h src/Rect.cpp include/Rect.h src/Vec2.cpp include/Vec2.h src/Component.cpp include/Component.h src/GameObject.cpp include/GameObject.h src/Sound.cpp include/Sound.h src/Face.cpp include/Face.h)
+add_executable(140017658_BrunoRodrigues src/main.cpp include/SDL_include.h src/Game.cpp include/Game.h src/State.cpp include/State.h src/Sprite.cpp include/Sprite.h src/Music.cpp include/Music.h src/Rect.cpp include/Rect.h src/Vec2.cpp include/Vec2.h src/Component.cpp include/Component.h src/GameObject.cpp include/GameObject.h src/Sound.cpp include/Sound.h src/Face.cpp include/Face.h src/TileSet.cpp include/TileSet.h include/TileMap.cpp src/TileMap.h src/Resources.cpp include/Resources.h)

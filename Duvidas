@@ -1,8 +1,11 @@
-.O que fazer com o ClipRect do Sprite, depois que temos agora o GameObject?
-    -
-.Transformar Music em component?
+.O que fazer com o GO que sera passado para TileSet?
     -
 
+
+.Transformar Music em component?
+    -Por enquanto, nao sera necessario
+.O que fazer com o ClipRect do Sprite, depois que temos agora o GameObject?
+    -Vamos precisar renderizar sem ter que usar o GO, e para isso usaremos o cliprect
 .Como evitar dependencia circular?
     -https://stackoverflow.com/questions/625799/resolve-build-errors-due-to-circular-dependency-amongst-classes
     -https://stackoverflow.com/questions/346058/c-class-header-files-organization

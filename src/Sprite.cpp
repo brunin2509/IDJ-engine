@@ -47,10 +47,10 @@ void Sprite::SetClip(int x, int y, int w, int h) {
     clipRect.h = h;
 }
 
-void Sprite::Render() {
+void Sprite::Render(int x, int y) {
     SDL_Rect dstRect{};
-    dstRect.x = (int) this->associated.box.x;
-    dstRect.y = (int) this->associated.box.y;
+    dstRect.x = x;
+    dstRect.y = y;
     dstRect.w = clipRect.w;
     dstRect.h = clipRect.h;
 
@@ -58,6 +58,10 @@ void Sprite::Render() {
         cerr << "SDL_RenderCopy RETURNED ERROR: " << SDL_GetError();
         exit(1);
     }
+}
+
+void Sprite::Render() {
+    Render((int) this->associated.box.x, (int) this->associated.box.y);
 }
 
 int Sprite::GetWidth() {

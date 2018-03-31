@@ -22,6 +22,7 @@ public:
     void SetClip(int x, int y, int w, int h);
     void Update(float dt) override;
     void Render() override;
+    void Render(int x, int y);
     bool Is(std::string type) override;
     int GetWidth();
     int GetHeight();
