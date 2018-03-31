@@ -2,6 +2,7 @@
 // Created by bruno on 18/03/18.
 //
 
+#include <Resources.h>
 #include "Music.h"
 
 using std::cerr;
@@ -16,9 +17,6 @@ Music::Music(std::string file) {
 }
 
 Music::~Music(){
-    if(music){
-        Mix_FreeMusic(music);
-    }
 }
 
 void Music::Play(int times) {
@@ -26,6 +24,7 @@ void Music::Play(int times) {
         Mix_PlayMusic(music, times);
     } else{
         cerr << "MUSIC COULD NOT BE PLAYED BECAUSE IT IS NULL";
+        exit(1);
     }
 }
 
@@ -34,10 +33,11 @@ void Music::Stop(int msToStop) {
 }
 
 void Music::Open(std::string file) {
-    music = Mix_LoadMUS(file.c_str());
+    music = Resources::GetMusic(file);
 
     if(!music){
-        cerr << "THE MUSIC COULD NOT BE LOADED CORRECTLY";
+        cerr << "COULD NOT OPEN SOUND FILE: " << Mix_GetError();
+        exit(1);
     }
 }
 

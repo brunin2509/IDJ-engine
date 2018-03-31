@@ -13,6 +13,7 @@
 class TileMap: public Component {
 public:
     TileMap(GameObject &associated, std::string file, TileSet *tileSet);
+    ~TileMap();
 
     void Load(std::string file);
     void SetTileSet(TileSet* tileSet);
@@ -27,11 +28,11 @@ public:
     bool Is(std::string type) override;
 
 private:
-    std::vector tileMatrix;
+    std::vector<int> tileMatrix;
     TileSet* tileSet;
-    int mapWidth;
-    int mapHeight;
-    int mapDepth;
+    int mapWidth = -1;
+    int mapHeight = -1;
+    int mapDepth = -1;
 };
 
 

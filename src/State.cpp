@@ -4,14 +4,24 @@
 
 #include <Sound.h>
 #include <Face.h>
+#include <TileSet.h>
 #include "State.h"
+#include "TileMap.h"
+
 #define PI 3.14159265358979323846
 
 State::State(): music("./assets/audio/stageState.ogg") {
-    auto gameObject = new GameObject();
+    auto mapGO = new GameObject();
+    mapGO->box.x = 0;
+    mapGO->box.y = 0;
 
-    gameObject->AddComponent(new Sprite(*gameObject, "./assets/img/ocean.jpg"));
-    objectArray.emplace_back(gameObject);
+    auto tileSet = new TileSet(64, 64, "./assets/img/tileset.png");
+
+    auto tileMap = new TileMap(*mapGO, ".assets/map/tileMap.txt", tileSet);
+
+    mapGO->AddComponent(tileMap);
+
+    objectArray.emplace_back(mapGO);
 
     quitRequested = false;
     music.Play();
@@ -79,8 +89,10 @@ void State::Input() {
 
                 if(go->box.Contains( {(float)mouseX, (float)mouseY} ) ) {
                     Face* face = (Face*)go->GetComponent( "Face" );
-                    if ( nullptr != face ) {
-                        // Aplica dano
+                    if ( nullptr != face && !face->Died()) {
+                        // Aplica dano somente se o face ja nao estiver morto,
+                        // pois o componente face ainda pode estar existindo,
+                        // mas estar com o hp <= 0, e, consequentemente, sem sprite
                         face->Damage(std::rand() % 10 + 10);
                         // Sai do loop (só queremos acertar um)
                         break;

@@ -10,6 +10,8 @@ Face::Face(GameObject &associated) : Component(associated) {
 }
 
 void Face::Damage(int damage) {
+    if(hitpoints <= 0) return; // no need to do anything to an HP that is already 0 or less
+
     hitpoints -= damage;
 
     if(hitpoints <= 0){
@@ -20,6 +22,9 @@ void Face::Damage(int damage) {
             soundComponent->Play();
         }
 
+        // todo: its still bad, because, even without the sprite, we know the component
+        // todo: still exists, and it is still clickable
+        // currently, this problem is being treated inside State::Input
         associated.RemoveComponent(associated.GetComponent("Sprite"));
     }
 }

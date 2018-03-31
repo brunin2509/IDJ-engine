@@ -3,6 +3,7 @@
 //
 
 #include <Game.h>
+#include "Resources.h"
 
 using std::cerr;
 
@@ -16,20 +17,14 @@ Sprite::Sprite(GameObject &associated, std::string file) : Component(associated)
 }
 
 Sprite::~Sprite() {
-    if(texture){
-        SDL_DestroyTexture(texture);
-    }
 }
 
 void Sprite::Open(std::string file) {
-    if(texture){
-        SDL_DestroyTexture(texture);
-    }
 
-    texture = IMG_LoadTexture(Game::GetInstance().GetRenderer(), file.c_str());
+    texture = Resources::GetImage(file);
 
     if(!texture){
-        cerr << "IMG_LoadTexture RETURNED ERROR: " << SDL_GetError();
+        cerr << "TEXTURE COULD NOT BE OPENED\n";
         exit(1);
     }
 

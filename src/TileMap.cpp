@@ -2,7 +2,8 @@
 // Created by bruno on 30/03/18.
 //
 
-#include "../src/TileMap.h"
+#include "TileMap.h"
+#include <fstream>
 
 using std::cerr;
 
@@ -11,8 +12,41 @@ TileMap::TileMap(GameObject &associated, std::string file, TileSet *tileSet) : C
     SetTileSet(tileSet);
 }
 
+TileMap::~TileMap() {
+    delete tileSet;
+    tileMatrix.clear();
+}
+
 void TileMap::Load(std::string file) {
-    //todo (chatao)
+    std::ifstream tileMapFile;
+    std::string line;
+
+    tileMapFile.open("./assets/map/tileMap.txt");
+
+    if(!tileMapFile.is_open()){
+        cerr << "tileMap.txt COULD NOT BE OPENED. \n";
+        exit(1);
+    }
+
+    tileMapFile >> line;
+    sscanf(line.c_str(), "%d,%d,%d,", &mapHeight, &mapWidth, &mapDepth);
+
+    if(mapWidth == -1 || mapHeight == -1 || mapDepth == -1){ // if one of these values are STILL -1...
+        cerr << "mapHeight, mapWidth OR mapDepth COULD NOT BE READ. \n";
+        tileMapFile.close();
+        exit(1);
+    }
+
+    int tileIndex;
+    char comma;
+
+    for(int i = 0; i < mapWidth*mapHeight*mapDepth; i++){
+        tileMapFile >> tileIndex;
+        tileMapFile >> comma;
+        tileMatrix.push_back(tileIndex-1);
+    }
+
+    tileMapFile.close();
 }
 
 void TileMap::SetTileSet(TileSet *tileSet) {
@@ -21,7 +55,7 @@ void TileMap::SetTileSet(TileSet *tileSet) {
 
 int &TileMap::At(int x, int y, int z) {
     if(x >= mapWidth || y >= mapHeight || z >= mapDepth){
-        cerr << "ONE ORE MORE INDEXES FOR THE TILE MAP ARE NOT VALID. \n";
+        cerr << "ONE ORE MORE POSITIONS FOR THE TILE MAP ARE NOT VALID. \n";
         exit(1);
     }
 
@@ -38,7 +72,7 @@ void TileMap::RenderLayer(int layer, int cameraX, int cameraY) {
 
 void TileMap::Render() {
     for(int i = 0; i < mapDepth; i++){
-        RenderLayer(i, (int) associated.box.x, (int) associated.box.y)
+        RenderLayer(i, (int) associated.box.x, (int) associated.box.y);
     }
 }
 
