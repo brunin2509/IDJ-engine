@@ -4,7 +4,7 @@
 
 #include "Game.h"
 #include <ctime>
-#include <Resources.h>
+#include "Resources.h"
 
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER

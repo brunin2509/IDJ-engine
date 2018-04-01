@@ -1,9 +1,13 @@
 //
-// Created by bruno on 30/03/18.
+// Created by bruno on 01/04/18.
 //
 
-#include <Game.h>
 #include "Resources.h"
+#include "Game.h"
+
+std::unordered_map<std::string, SDL_Texture*> Resources::imageTable;
+std::unordered_map<std::string, Mix_Music*> Resources::musicTable;
+std::unordered_map<std::string, Mix_Chunk*> Resources::soundTable;
 
 using std::cerr;
 
@@ -81,8 +85,6 @@ Mix_Chunk *Resources::GetSound(std::string file) {
 
         return sound;
     }
-
-    return nullptr;
 }
 
 void Resources::ClearSounds() {

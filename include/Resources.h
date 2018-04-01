@@ -1,13 +1,12 @@
 //
-// Created by bruno on 30/03/18.
+// Created by bruno on 01/04/18.
 //
 
 #ifndef INC_140017658_IDJ_RESOURCES_H
 #define INC_140017658_IDJ_RESOURCES_H
 
-
-#define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
+#define INCLUDE_SDL_IMAGE
 #include "SDL_include.h"
 #include <iostream>
 #include <unordered_map>
