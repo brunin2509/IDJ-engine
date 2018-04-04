@@ -15,10 +15,13 @@ State::State(): music("./assets/audio/stageState.ogg") {
     mapGO->box.x = 0;
     mapGO->box.y = 0;
 
+    auto bg = new Sprite(*mapGO, "./assets/img/ocean.jpg");
+
     auto tileSet = new TileSet(64, 64, "./assets/img/tileset.png");
 
     auto tileMap = new TileMap(*mapGO, ".assets/map/tileMap.txt", tileSet);
 
+    mapGO->AddComponent(bg);
     mapGO->AddComponent(tileMap);
 
     objectArray.emplace_back(mapGO);
