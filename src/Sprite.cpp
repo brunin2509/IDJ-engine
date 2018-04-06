@@ -3,6 +3,7 @@
 //
 
 #include <Game.h>
+#include <Camera.h>
 #include "Resources.h"
 
 using std::cerr;
@@ -56,7 +57,7 @@ void Sprite::Render(int x, int y) {
 }
 
 void Sprite::Render() {
-    Render((int) this->associated.box.x, (int) this->associated.box.y);
+    Render((int) (this->associated.box.x - Camera::pos.x), (int) (this->associated.box.y - Camera::pos.y));
 }
 
 int Sprite::GetWidth() {

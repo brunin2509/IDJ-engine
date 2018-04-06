@@ -5,6 +5,8 @@
 #ifndef INC_140017658_T1_VEC2_H
 #define INC_140017658_T1_VEC2_H
 
+#define PI 3.14159265358979323846
+
 class Vec2 {
 public:
     Vec2();

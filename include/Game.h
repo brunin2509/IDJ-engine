@@ -13,6 +13,7 @@ class Game {
 public:
     ~Game();
     void Run( );
+    float GetDeltaTime();
 
     SDL_Renderer* GetRenderer();
     State& GetState();
@@ -20,10 +21,16 @@ public:
 
 private:
     Game(std::string title, int width, int height);
+
     static Game* instance;
     SDL_Window* window;
     SDL_Renderer* renderer;
     State* state;
+
+    int frameStart;
+    float dt;
+
+    void CalculateDeltaTime();
 };
 
 #endif //T1_PROJECT_GAME_H

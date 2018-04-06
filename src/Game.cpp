@@ -4,6 +4,7 @@
 
 #include "Game.h"
 #include <ctime>
+#include <InputManager.h>
 #include "Resources.h"
 
 #define INCLUDE_SDL_IMAGE
@@ -21,7 +22,7 @@ Game& Game::GetInstance() {
     return *(new Game("140017658_BrunoRodrigues", 1024, 600));
 }
 
-Game::Game(std::string title, int width, int height) {
+Game::Game(std::string title, int width, int height) : frameStart(0), dt(0.0) {
     srand((unsigned int) (time(nullptr)));
 
     if(instance != nullptr){
@@ -90,8 +91,13 @@ SDL_Renderer* Game::GetRenderer() {
 }
 
 void Game::Run() {
+//    LIXO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//    auto inputManager = InputManager::GetInstance();
+
     while(!state->QuitRequested()){
-        state->Update(0.0);
+        CalculateDeltaTime();
+        InputManager::GetInstance().Update();
+        state->Update(dt);
         state->Render();
         SDL_RenderPresent(renderer);
         SDL_Delay(33);
@@ -100,4 +106,14 @@ void Game::Run() {
     Resources::ClearImages();
     Resources::ClearMusics();
     Resources::ClearSounds();
+}
+
+void Game::CalculateDeltaTime() {
+    int aux = SDL_GetTicks();
+    dt = (aux - frameStart) / (float)1000;
+    frameStart = aux;
+}
+
+float Game::GetDeltaTime() {
+    return dt;
 }

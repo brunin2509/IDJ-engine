@@ -4,6 +4,7 @@
 
 #include "TileMap.h"
 #include <fstream>
+#include <Camera.h>
 
 using std::cerr;
 
@@ -65,14 +66,14 @@ int &TileMap::At(int x, int y, int z) {
 void TileMap::RenderLayer(int layer, int cameraX, int cameraY) {
     for(int y = 0; y < mapHeight; y++){
         for(int x = 0; x < mapWidth; x++){
-            tileSet->RenderTile((unsigned) At(x, y, layer), x*tileSet->GetTileWidth(), y*tileSet->GetTileHeight());
+            tileSet->RenderTile((unsigned) At(x, y, layer), x*tileSet->GetTileWidth() - cameraX, y*tileSet->GetTileHeight() - cameraY);
         }
     }
 }
 
 void TileMap::Render() {
     for(int i = 0; i < mapDepth; i++){
-        RenderLayer(i, (int) associated.box.x, (int) associated.box.y);
+        RenderLayer(i, (int) Camera::pos.x, (int) Camera::pos.y);
     }
 }
 

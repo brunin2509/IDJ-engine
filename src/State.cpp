@@ -5,29 +5,41 @@
 #include <Sound.h>
 #include <Face.h>
 #include <TileSet.h>
+#include <InputManager.h>
+#include <Camera.h>
+#include <CameraFollower.h>
 #include "State.h"
 #include "TileMap.h"
 
-#define PI 3.14159265358979323846
-
 State::State(): music("./assets/audio/stageState.ogg") {
+    quitRequested = false;
+    music.Play();
+
+    // carrega variaveis relativas ao background
+    auto bgGO = new GameObject();
+    bgGO->box.x = 0;
+    bgGO->box.y = 0;
+
+    auto bg = new Sprite(*bgGO, "./assets/img/ocean.jpg");
+    auto bgCamFollower = new CameraFollower(*bgGO);
+
+    bgGO->AddComponent(bg);
+    bgGO->AddComponent(bgCamFollower);
+
+    objectArray.emplace_back(bgGO);
+
+    // carrega variaveis relativas ao mapa
     auto mapGO = new GameObject();
     mapGO->box.x = 0;
     mapGO->box.y = 0;
 
-    auto bg = new Sprite(*mapGO, "./assets/img/ocean.jpg");
-
     auto tileSet = new TileSet(64, 64, "./assets/img/tileset.png");
-
     auto tileMap = new TileMap(*mapGO, ".assets/map/tileMap.txt", tileSet);
 
-    mapGO->AddComponent(bg);
     mapGO->AddComponent(tileMap);
 
+    // Remember: o mapGO eh o SEGUNDO objeto no objectArray (indice 1)
     objectArray.emplace_back(mapGO);
-
-    quitRequested = false;
-    music.Play();
 }
 
 State::~State() {
@@ -38,12 +50,28 @@ void State::LoadAssets() {
 }
 
 void State::Update(float dt) {
-    Input();
+    auto inputManager = InputManager::GetInstance();
 
+    // atualiza a camera e a box do GameObject do mapa (lembrando novamente que o GO do mapa esta no indice 1)
+    Camera::Update(dt);
+
+    // se apertar esc, seta o quitRequested
+    quitRequested =  inputManager.KeyPress(ESCAPE_KEY) || inputManager.QuitRequested();
+
+    // se apertar espaco, cria um Face
+    if( inputManager.KeyPress(SPACE_KEY) ) {
+        Vec2 objPos = Vec2(200, 0).Rotate((float)(-PI + PI * (std::rand() % 1001) / 500.0)) +
+                      Vec2(inputManager.GetMouseX(), inputManager.GetMouseY());
+
+        AddObject((int)objPos.x, (int)objPos.y);
+    }
+
+    // executa o update em cada um dos objetos no objectArray
     for (auto &gameObjects : objectArray) {
         gameObjects->Update(dt);
     }
 
+    // depois de executar os updates, verifica se algum deles morreu
     for (int i = 0; i < objectArray.size(); i++) {
         if(objectArray[i]->IsDead()){
             objectArray.erase(objectArray.begin() + i);
@@ -61,69 +89,13 @@ bool State::QuitRequested() {
     return quitRequested;
 }
 
-
-void State::Input() {
-    SDL_Event event;
-    int mouseX, mouseY;
-
-    // Obtenha as coordenadas do mouse
-    SDL_GetMouseState(&mouseX, &mouseY);
-
-    // SDL_PollEvent retorna 1 se encontrar eventos, zero caso contrário
-    while (SDL_PollEvent(&event)) {
-
-        // Se o evento for quit, setar a flag para terminação
-        if(event.type == SDL_QUIT) {
-            quitRequested = true;
-        }
-
-        // Se o evento for clique...
-        if(event.type == SDL_MOUSEBUTTONDOWN) {
-
-            // Percorrer de trás pra frente pra sempre clicar no objeto mais de cima
-            for(long i = objectArray.size() - 1; i >= 0; --i) {
-                // Obtem o ponteiro e casta pra Face.
-                auto go = (GameObject*) objectArray[i].get();
-                // Nota: Desencapsular o ponteiro é algo que devemos evitar ao máximo.
-                // O propósito do unique_ptr é manter apenas uma cópia daquele ponteiro,
-                // ao usar get(), violamos esse princípio e estamos menos seguros.
-                // Esse código, assim como a classe Face, é provisório. Futuramente, para
-                // chamar funções de GameObjects, use objectArray[i]->função() direto.
-
-                if(go->box.Contains( {(float)mouseX, (float)mouseY} ) ) {
-                    Face* face = (Face*)go->GetComponent( "Face" );
-                    if ( nullptr != face && !face->Died()) {
-                        // Aplica dano somente se o face ja nao estiver morto,
-                        // pois o componente face ainda pode estar existindo,
-                        // mas estar com o hp <= 0, e, consequentemente, sem sprite
-                        face->Damage(std::rand() % 10 + 10);
-                        // Sai do loop (só queremos acertar um)
-                        break;
-                    }
-                }
-            }
-        }
-        if( event.type == SDL_KEYDOWN ) {
-            // Se a tecla for ESC, setar a flag de quit
-            if( event.key.keysym.sym == SDLK_ESCAPE ) {
-                quitRequested = true;
-            }
-                // Se não, crie um objeto
-            else {
-                Vec2 objPos = Vec2( 200, 0 ).Rotate((float)(-PI + PI * (std::rand() % 1001) / 500.0)) + Vec2(mouseX, mouseY );
-                AddObject((int)objPos.x, (int)objPos.y);
-            }
-        }
-    }
-}
-
 void State::AddObject(int mouseX, int mouseY) {
     auto gameObject = new GameObject();
 
     auto sprite = new Sprite(*gameObject, "./assets/img/penguin.png");
 
-    gameObject->box.x = mouseX - gameObject->box.w/2;
-    gameObject->box.y = mouseY - gameObject->box.h/2;
+    gameObject->box.x = mouseX - gameObject->box.w/2 + Camera::pos.x;
+    gameObject->box.y = mouseY - gameObject->box.h/2 + Camera::pos.y;
 
     auto sound = new Sound(*gameObject, "./assets/audio/boom.wav");
 

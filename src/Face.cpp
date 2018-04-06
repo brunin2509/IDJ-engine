@@ -3,6 +3,8 @@
 //
 
 #include <Sound.h>
+#include <InputManager.h>
+#include <Camera.h>
 #include "Face.h"
 
 Face::Face(GameObject &associated) : Component(associated) {
@@ -30,15 +32,22 @@ void Face::Damage(int damage) {
 }
 
 void Face::Update(float dt) {
-    if(Died()){
+    if(Died()){ // if hp <= 0...
         auto soundComponent = (Sound*) associated.GetComponent("Sound");
 
         if(soundComponent && !soundComponent->IsPlaying()){
             associated.RequestDelete(); // objeto morre somente se o componente ja tocou o som
         }
     }
+    else{
+        auto inputManager = InputManager::GetInstance();
 
-
+        // com essa implementacao simples de damage, nao temos a feature de atacar somente o Face mais de cima
+        if(inputManager.MousePress(LEFT_MOUSE_BUTTON) &&
+           associated.box.Contains({(float)inputManager.GetMouseX() + Camera::pos.x, (float)inputManager.GetMouseY() + Camera::pos.y})){
+            Damage(std::rand() % 10 + 10);
+        }
+    }
 }
 
 void Face::Render() {

@@ -24,7 +24,6 @@ public:
     void Render();
 
 private:
-    void Input();
     void AddObject(int mouseX, int mouseY);
 
     Music music;
