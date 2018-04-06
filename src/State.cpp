@@ -31,7 +31,7 @@ void State::Update(float dt) {
         gameObjects->Update(dt);
     }
 
-    for (int i = 0; i < objectArray.size(); i++) {
+    for (unsigned i = 0; i < objectArray.size(); i++) {
         if(objectArray[i]->IsDead()){
             objectArray.erase(objectArray.begin() + i);
         }
@@ -79,7 +79,7 @@ void State::Input() {
 
                 if(go->box.Contains( {(float)mouseX, (float)mouseY} ) ) {
                     Face* face = (Face*)go->GetComponent( "Face" );
-                    if ( nullptr != face ) {
+                    if ( nullptr != face && !face->Died() ) {
                         // Aplica dano
                         face->Damage(std::rand() % 10 + 10);
                         // Sai do loop (só queremos acertar um)
@@ -105,7 +105,7 @@ void State::Input() {
 void State::AddObject(int mouseX, int mouseY) {
     auto gameObject = new GameObject();
 
-    auto sprite = new Sprite(*gameObject, "./assets/img/penguin.png");
+    auto sprite = new Sprite(*gameObject, "./assets/img/penguinface.png");
 
     gameObject->box.x = mouseX - gameObject->box.w/2;
     gameObject->box.y = mouseY - gameObject->box.h/2;

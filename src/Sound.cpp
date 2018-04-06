@@ -17,7 +17,7 @@ Sound::~Sound() {
         Mix_HaltChannel(channel);
         Mix_FreeChunk(chunk);
     }
-};
+}
 
 void Sound::Play(int times) {
     channel = Mix_PlayChannel(-1, chunk, times-1);
