@@ -24,10 +24,12 @@ public:
     void AddComponent(Component* cpt);
     void RemoveComponent(Component* cpt);
     Component* GetComponent(std::string type);
+    void Start();
 
 private:
     std::vector<std::unique_ptr<Component>> components;
     bool isDead;
+    bool started;
 };
 
 

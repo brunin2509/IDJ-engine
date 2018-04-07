@@ -11,8 +11,7 @@
 #include "State.h"
 #include "TileMap.h"
 
-State::State(): music("./assets/audio/stageState.ogg") {
-    quitRequested = false;
+State::State(): music("./assets/audio/stageState.ogg"), quitRequested(false), started(false) {
     music.Play();
 
     // carrega variaveis relativas ao background
@@ -92,7 +91,7 @@ bool State::QuitRequested() {
 void State::AddObject(int mouseX, int mouseY) {
     auto gameObject = new GameObject();
 
-    auto sprite = new Sprite(*gameObject, "./assets/img/penguin.png");
+    auto sprite = new Sprite(*gameObject, "./assets/img/penguinface.png");
 
     gameObject->box.x = mouseX - gameObject->box.w/2 + Camera::pos.x;
     gameObject->box.y = mouseY - gameObject->box.h/2 + Camera::pos.y;
@@ -106,6 +105,37 @@ void State::AddObject(int mouseX, int mouseY) {
     gameObject->AddComponent(face);
 
     objectArray.emplace_back(gameObject);
+}
+
+void State::Start() {
+    LoadAssets();
+
+    for (auto &gameObjects : objectArray) {
+        gameObjects->Start();
+    }
+
+    started = true;
+}
+
+std::weak_ptr<GameObject> State::AddObject(GameObject *go) {
+    std::shared_ptr<GameObject> sharedGO(go);
+
+    objectArray.push_back(sharedGO);
+
+    if(started){
+        go->Start();
+    }
+    return std::weak_ptr<GameObject>(sharedGO);
+}
+
+std::weak_ptr<GameObject> State::GetObjectPtr(GameObject *go) {
+    for(auto& it : objectArray){
+        if(it.get() == go){
+            return std::weak_ptr<GameObject>(it);
+        }
+    }
+
+    return std::weak_ptr<GameObject>();
 }
 
 

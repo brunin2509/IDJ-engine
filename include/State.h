@@ -23,12 +23,18 @@ public:
     void Update (float dt);
     void Render();
 
+    void Start();
+    std::weak_ptr<GameObject> AddObject(GameObject* go);
+    std::weak_ptr<GameObject> GetObjectPtr(GameObject* go);
+
 private:
     void AddObject(int mouseX, int mouseY);
 
     Music music;
     bool quitRequested;
-    std::vector<std::unique_ptr<GameObject>> objectArray;
+    std::vector<std::shared_ptr<GameObject>> objectArray;
+
+    bool started;
 };
 
 

@@ -94,6 +94,8 @@ void Game::Run() {
 //    LIXO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //    auto inputManager = InputManager::GetInstance();
 
+    state->Start();
+
     while(!state->QuitRequested()){
         CalculateDeltaTime();
         InputManager::GetInstance().Update();
