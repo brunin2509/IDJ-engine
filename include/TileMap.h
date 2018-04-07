@@ -9,6 +9,7 @@
 #include <Component.h>
 #include <vector>
 #include <TileSet.h>
+#define PARALLAX 0.5
 
 class TileMap: public Component {
 public:

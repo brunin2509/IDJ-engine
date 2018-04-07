@@ -66,7 +66,11 @@ int &TileMap::At(int x, int y, int z) {
 void TileMap::RenderLayer(int layer, int cameraX, int cameraY) {
     for(int y = 0; y < mapHeight; y++){
         for(int x = 0; x < mapWidth; x++){
-            tileSet->RenderTile((unsigned) At(x, y, layer), x*tileSet->GetTileWidth() - cameraX -0.3*layer*cameraX, y*tileSet->GetTileHeight() - cameraY-0.3*layer*cameraY);
+            tileSet->RenderTile(
+                    (unsigned) At(x, y, layer),
+                    x*tileSet->GetTileWidth() - cameraX - PARALLAX*layer*cameraX,
+                    y*tileSet->GetTileHeight() - cameraY - PARALLAX*layer*cameraY
+            );
         }
     }
 }
