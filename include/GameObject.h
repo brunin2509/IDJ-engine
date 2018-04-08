@@ -15,7 +15,8 @@ public:
     GameObject();
     ~GameObject();
 
-    Rect box{0,0,0,0};
+    Rect box;
+    double angleDeg;
 
     void Update(float dt);
     void Render();

@@ -22,6 +22,18 @@ Rect Rect::operator+(Vec2 vec) {
     return {vec.x+this->x, vec.y+this->y, this->w, this->h};
 }
 
+Rect Rect::operator=(Vec2 vec) {
+    this->x = vec.x;
+    this->y = vec.y;
+    return *this;
+}
+
+Rect Rect::operator+=(Vec2 vec) {
+    this->x += vec.x;
+    this->y += vec.y;
+    return *this;
+}
+
 Vec2 Rect::Center() {
     return {this->x+this->w/2, this->y+this->h/2};
 }
@@ -38,4 +50,5 @@ void Rect::Centralize() {
     x = x - w/2;
     y = y - h/2;
 }
+
 

@@ -6,9 +6,10 @@
 #include <InputManager.h>
 #include <Camera.h>
 #include <Game.h>
+#include <Minion.h>
 #include "Alien.h"
 
-Alien::Alien(GameObject &associated, int nMinions): Component(associated), speed(0,0), hp(30), nMinions(nMinions) {
+Alien::Alien(GameObject &associated, int nMinions): Component(associated), speed(0,0), hp(ALIEN_INITIAL_HP), nMinions(nMinions) {
     associated.AddComponent(new Sprite(associated, "./assets/img/alien.png"));
 }
 
@@ -21,19 +22,16 @@ Alien::~Alien(){
 void Alien::Start() {
     // WTFFFFFFFFFFF
     //auto game = Game::GetInstance();
-    auto boxCenter = associated.box.Center();
-    Vec2 minionPositioner(MINION_DISTANCE, 0);
-    Vec2 minionPosition(0, 0);
     GameObject* minionGO = nullptr;
+    Minion* minion = nullptr;
+    double minionInitialArc = 0;
 
     for(int i = 0; i < nMinions; i++){
         minionGO = new GameObject();
-        minionGO->AddComponent(new Sprite(*minionGO, "./assets/img/minion.png"));
+        minionInitialArc = i*2*PI/nMinions;
+        minion = new Minion(*minionGO, Game::GetInstance().GetState().GetObjectPtr(&associated), (float)minionInitialArc);
 
-        minionPosition = boxCenter + minionPositioner.Rotate(i*2*PI/nMinions);
-        minionGO->box.x = minionPosition.x;
-        minionGO->box.y = minionPosition.y;
-        minionGO->box.Centralize();
+        minionGO->AddComponent(minion);
 
         minionArray.push_back(Game::GetInstance().GetState().AddObject(minionGO));
     }
@@ -49,6 +47,8 @@ void Alien::Update(float dt) {
         return;
     }
 
+    associated.angleDeg += ALIEN__ANGULAR_SPEED * dt;
+
     if(inputManager.MousePress(LEFT_MOUSE_BUTTON)){
         taskQueue.push(Action(Action::SHOOT, mouseX + Camera::pos.x, mouseY + Camera::pos.y));
     }
@@ -59,8 +59,7 @@ void Alien::Update(float dt) {
     if(!taskQueue.empty()){
         auto task = taskQueue.front();
         if(task.type == Action::MOVE && task.pos.Distance(associated.box.Center()) <= ALIEN_SPEED*dt) {
-            associated.box.x = task.pos.x;
-            associated.box.y = task.pos.y;
+            associated.box = task.pos;
             associated.box.Centralize();
 
             speed = {0,0};
@@ -72,11 +71,26 @@ void Alien::Update(float dt) {
                 speed = speed.Rotate(task.pos.InclinationOfDifference(associated.box.Center()));
             }
 
-            associated.box.x += speed.x;
-            associated.box.y += speed.y;
+            associated.box += speed;;
         }
         else if(task.type == Action::SHOOT){
-            //todo
+            if(nMinions > 0){
+                auto closestMinionGO = minionArray[0].lock();
+                auto minionGO = closestMinionGO;
+
+                for(int i = 1; i < nMinions; i++){
+                    minionGO = minionArray[i].lock();
+                    if(closestMinionGO.get() && minionGO.get()){ // verifica se os dois shared_ptrs estao preenchidos antes de mais nada
+                        closestMinionGO = (task.pos.Distance({minionGO->box.x,minionGO->box.y}) <
+                                           task.pos.Distance({closestMinionGO->box.x,closestMinionGO->box.y})) ? minionGO : closestMinionGO;
+                    }
+                }
+
+                auto closestMinion = (Minion*) closestMinionGO->GetComponent("Minion");
+                closestMinion->Shoot(task.pos);
+            }
+
+
             taskQueue.pop();
         }
 

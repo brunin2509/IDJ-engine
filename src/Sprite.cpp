@@ -8,12 +8,10 @@
 
 using std::cerr;
 
-Sprite::Sprite(GameObject &associated) : Component(associated) {
-    texture = nullptr;
+Sprite::Sprite(GameObject &associated) : Component(associated), texture(nullptr), width(0), height(0), scale(1,1) {
 }
 
-Sprite::Sprite(GameObject &associated, std::string file) : Component(associated) {
-    texture = nullptr;
+Sprite::Sprite(GameObject &associated, std::string file) : Component(associated), texture(nullptr), width(0), height(0), scale(1,1) {
     Open(file);
 }
 
@@ -47,10 +45,10 @@ void Sprite::Render(int x, int y) {
     SDL_Rect dstRect{};
     dstRect.x = x;
     dstRect.y = y;
-    dstRect.w = clipRect.w;
-    dstRect.h = clipRect.h;
+    dstRect.w = (int) (clipRect.w*scale.x);
+    dstRect.h = (int) (clipRect.h*scale.y);
 
-    if(SDL_RenderCopy(Game::GetInstance().GetRenderer(), texture, &clipRect, &dstRect) != 0){
+    if(SDL_RenderCopyEx(Game::GetInstance().GetRenderer(), texture, &clipRect, &dstRect, associated.angleDeg, nullptr, SDL_FLIP_NONE) != 0){
         cerr << "SDL_RenderCopy RETURNED ERROR: " << SDL_GetError();
         exit(1);
     }
@@ -61,11 +59,11 @@ void Sprite::Render() {
 }
 
 int Sprite::GetWidth() {
-    return width;
+    return (int) (width*scale.x);
 }
 
 int Sprite::GetHeight() {
-    return  height;
+    return  (int) (height*scale.y);
 }
 
 bool Sprite::IsOpen() {
@@ -80,4 +78,15 @@ bool Sprite::Is(std::string type) {
     return type == "Sprite";
 }
 
+void Sprite::SetScale(float scaleX, float scaleY) {
+    scale.x = (scaleX) ? scaleX : scale.x;
+    scale.y = (scaleY) ? scaleY : scale.y;
+    auto oldCenter = associated.box.Center();
+    associated.box.w = GetWidth();
+    associated.box.h = GetHeight();
+    associated.box += (oldCenter - associated.box.Center());
+}
 
+Vec2 Sprite::GetScale() {
+    return scale;
+}

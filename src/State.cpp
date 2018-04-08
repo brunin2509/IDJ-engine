@@ -17,8 +17,7 @@ State::State(): music("./assets/audio/stageState.ogg"), quitRequested(false), st
 
     // carrega variaveis relativas ao background
     auto bgGO = new GameObject();
-    bgGO->box.x = 0;
-    bgGO->box.y = 0;
+    bgGO->box = {0,0};
 
     auto bg = new Sprite(*bgGO, "./assets/img/ocean.jpg");
     auto bgCamFollower = new CameraFollower(*bgGO);
@@ -31,8 +30,7 @@ State::State(): music("./assets/audio/stageState.ogg"), quitRequested(false), st
 
     // carrega variaveis relativas ao mapa
     auto mapGO = new GameObject();
-    mapGO->box.x = 0;
-    mapGO->box.y = 0;
+    mapGO->box = {0,0};
 
     auto tileSet = new TileSet(64, 64, "./assets/img/tileset.png");
     auto tileMap = new TileMap(*mapGO, ".assets/map/tileMap.txt", tileSet);
@@ -47,8 +45,7 @@ State::State(): music("./assets/audio/stageState.ogg"), quitRequested(false), st
     auto alienGO = new GameObject();
 
     auto alien = new Alien(*alienGO, 3);
-    alienGO->box.x = 512;
-    alienGO->box.y = 300;
+    alienGO->box = {512,300};
     alienGO->box.Centralize();
 
     alienGO->AddComponent(alien);
@@ -81,14 +78,24 @@ void State::Update(float dt) {
     }
 
     // executa o update em cada um dos objetos no objectArray
-    for (auto &gameObjects : objectArray) {
-        gameObjects->Update(dt);
+    for (int i = 0; i < objectArray.size(); i++) {
+        if(objectArray[i].get()){
+            objectArray[i]->Update(dt);
+        }
+        else{ // if null...
+            std::cout << "shared_ptr contains a null reference to a GameObject inside objectArray\n";
+        }
     }
 
     // depois de executar os updates, verifica se algum deles morreu
     for (int i = 0; i < objectArray.size(); i++) {
-        if(objectArray[i]->IsDead()){
-            objectArray.erase(objectArray.begin() + i);
+        if(objectArray[i].get()){
+            if(objectArray[i]->IsDead()){
+                objectArray.erase(objectArray.begin() + i);
+            }
+        }
+        else{ // if null...
+            std::cout << "shared_ptr contains a null reference to a GameObject inside objectArray\n";
         }
     }
 }

@@ -1,6 +1,11 @@
 .POR QUE CARALHOS NAO SE PODE COLOCAR INPUTMANAGER NUMA VARIAVEL???????????
     -
 
+.t5: alienCenter eh um weak_ptr mesmo?
+    -
+
+.Por que o uso de range-based loop no update do state falha? (acessa um item que eh nulo) (SIM, DOIS TIPOS DE FOR TEM COMPORTAMENTOS DIFERENTES, O QUE EH BIZAROO!!)
+    -
 
 .O que fazer com o GO que sera passado para TileSet?
     -no one knows
