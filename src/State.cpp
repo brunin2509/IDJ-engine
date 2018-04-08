@@ -8,6 +8,7 @@
 #include <InputManager.h>
 #include <Camera.h>
 #include <CameraFollower.h>
+#include <Alien.h>
 #include "State.h"
 #include "TileMap.h"
 
@@ -27,6 +28,7 @@ State::State(): music("./assets/audio/stageState.ogg"), quitRequested(false), st
 
     objectArray.emplace_back(bgGO);
 
+
     // carrega variaveis relativas ao mapa
     auto mapGO = new GameObject();
     mapGO->box.x = 0;
@@ -39,6 +41,19 @@ State::State(): music("./assets/audio/stageState.ogg"), quitRequested(false), st
 
     // Remember: o mapGO eh o SEGUNDO objeto no objectArray (indice 1)
     objectArray.emplace_back(mapGO);
+
+
+    // carrega um alien
+    auto alienGO = new GameObject();
+
+    auto alien = new Alien(*alienGO, 3);
+    alienGO->box.x = 512;
+    alienGO->box.y = 300;
+    alienGO->box.Centralize();
+
+    alienGO->AddComponent(alien);
+
+    objectArray.emplace_back(alienGO);
 }
 
 State::~State() {
@@ -93,8 +108,9 @@ void State::AddObject(int mouseX, int mouseY) {
 
     auto sprite = new Sprite(*gameObject, "./assets/img/penguinface.png");
 
-    gameObject->box.x = mouseX - gameObject->box.w/2 + Camera::pos.x;
-    gameObject->box.y = mouseY - gameObject->box.h/2 + Camera::pos.y;
+    gameObject->box.x = mouseX + Camera::pos.x;
+    gameObject->box.y = mouseY + Camera::pos.y;
+    gameObject->box.Centralize();
 
     auto sound = new Sound(*gameObject, "./assets/audio/boom.wav");
 

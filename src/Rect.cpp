@@ -34,3 +34,8 @@ bool Rect::Contains(Vec2 vec) {
     return vec.x >= x && vec.x <= x+w && vec.y >= y && vec.y <= y+h;
 }
 
+void Rect::Centralize() {
+    x = x - w/2;
+    y = y - h/2;
+}
+
