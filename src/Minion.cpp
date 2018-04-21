@@ -53,7 +53,9 @@ void Minion::Shoot(Vec2 target) {
             BULLET_SPEED,
             std::rand() % 11 + BULLET_MAX_DAMAGE - 10,
             BULLET_MAX_DISTANCE,
-            "./assets/img/minionbullet1.png");
+            "./assets/img/minionbullet2.png",
+            3,
+            0.5);
 
     bulletGO->AddComponent(bullet);
 

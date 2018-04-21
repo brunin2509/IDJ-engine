@@ -8,11 +8,25 @@
 
 using std::cerr;
 
-Sprite::Sprite(GameObject &associated) : Component(associated), texture(nullptr), width(0), height(0), scale(1,1) {
+Sprite::Sprite(GameObject &associated) :
+        Component(associated),
+        texture(nullptr),
+        width(0),
+        height(0),
+        scale(1,1),
+        currentFrame(0),
+        timeElapsed(0),
+        frameCount(1),
+        frameTime(1){
 }
 
-Sprite::Sprite(GameObject &associated, std::string file) : Component(associated), texture(nullptr), width(0), height(0), scale(1,1) {
+Sprite::Sprite(GameObject &associated, std::string file) : Sprite(associated){
     Open(file);
+}
+
+Sprite::Sprite(GameObject &associated, std::string file, int frameCount, float frameTime): Sprite(associated, file) {
+    SetFrameTime(frameTime);
+    SetFrameCount(frameCount);
 }
 
 Sprite::~Sprite() {
@@ -59,11 +73,11 @@ void Sprite::Render() {
 }
 
 int Sprite::GetWidth() {
-    return (int) (width*scale.x);
+    return (int) (clipRect.w*scale.x);
 }
 
 int Sprite::GetHeight() {
-    return  (int) (height*scale.y);
+    return  (int) (clipRect.h*scale.y);
 }
 
 bool Sprite::IsOpen() {
@@ -71,7 +85,13 @@ bool Sprite::IsOpen() {
 }
 
 void Sprite::Update(float dt) {
-    //todo?
+    timeElapsed += dt;
+
+    if(timeElapsed > frameTime){
+        timeElapsed -= frameTime;
+        currentFrame++;
+        SetClipToNewFrame();
+    }
 }
 
 bool Sprite::Is(std::string type) {
@@ -90,3 +110,33 @@ void Sprite::SetScale(float scaleX, float scaleY) {
 Vec2 Sprite::GetScale() {
     return scale;
 }
+
+void Sprite::SetFrame(int frame) {
+    currentFrame = frame;
+    SetClipToNewFrame();
+}
+
+void Sprite::SetClipToNewFrame() {
+    if(currentFrame < frameCount){
+        SetClip(currentFrame*clipRect.w, 0, clipRect.w, clipRect.h);
+    }
+    else{
+        currentFrame = 0;
+        SetClip(0, 0, clipRect.w, clipRect.h);
+    }
+}
+
+void Sprite::SetFrameCount(int frameCount) {
+    this->frameCount = frameCount;
+    clipRect.w /= frameCount;
+    associated.box.w = GetWidth(); // does the center matter?
+    SetFrame(0);
+}
+
+void Sprite::SetFrameTime(float frameTime) {
+    this->frameTime = frameTime;
+}
+
+
+
+

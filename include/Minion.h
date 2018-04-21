@@ -12,7 +12,7 @@
 
 #define ANGULAR_SPEED (PI/2) // em rad/s
 #define RADIUS 150 // em pixels
-#define BULLET_SPEED 1000
+#define BULLET_SPEED 100
 #define BULLET_MAX_DAMAGE 20
 #define BULLET_MAX_DISTANCE 1000
 
