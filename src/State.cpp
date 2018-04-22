@@ -3,7 +3,6 @@
 //
 
 #include <Sound.h>
-#include <Face.h>
 #include <TileSet.h>
 #include <InputManager.h>
 #include <Camera.h>
@@ -69,14 +68,6 @@ void State::Update(float dt) {
     // se apertar esc, seta o quitRequested
     quitRequested =  inputManager.KeyPress(ESCAPE_KEY) || inputManager.QuitRequested();
 
-    // se apertar espaco, cria um Face
-    if( inputManager.KeyPress(SPACE_KEY) ) {
-        Vec2 objPos = Vec2(200, 0).Rotate((float)(-PI + PI * (std::rand() % 1001) / 500.0)) +
-                      Vec2(inputManager.GetMouseX(), inputManager.GetMouseY());
-
-        AddObject((int)objPos.x, (int)objPos.y);
-    }
-
     // executa o update em cada um dos objetos no objectArray
     for (int i = 0; i < objectArray.size(); i++) {
         if(objectArray[i].get()){
@@ -108,26 +99,6 @@ void State::Render() {
 
 bool State::QuitRequested() {
     return quitRequested;
-}
-
-void State::AddObject(int mouseX, int mouseY) {
-    auto gameObject = new GameObject();
-
-    auto sprite = new Sprite(*gameObject, "./assets/img/penguinface.png");
-
-    gameObject->box.x = mouseX + Camera::pos.x;
-    gameObject->box.y = mouseY + Camera::pos.y;
-    gameObject->box.Centralize();
-
-    auto sound = new Sound(*gameObject, "./assets/audio/boom.wav");
-
-    auto face = new Face(*gameObject);
-
-    gameObject->AddComponent(sprite);
-    gameObject->AddComponent(sound);
-    gameObject->AddComponent(face);
-
-    objectArray.emplace_back(gameObject);
 }
 
 void State::Start() {

@@ -28,7 +28,6 @@ public:
     std::weak_ptr<GameObject> GetObjectPtr(GameObject* go);
 
 private:
-    void AddObject(int mouseX, int mouseY);
 
     Music music;
     bool quitRequested;
