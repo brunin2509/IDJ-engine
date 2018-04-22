@@ -20,7 +20,7 @@ PenguinBody::PenguinBody(GameObject &associated) :
 
     player = this;
 
-    auto sprite = new Sprite(associated, "penguin.png");
+    auto sprite = new Sprite(associated, "./assets/img/penguin.png");
     associated.AddComponent(sprite);
     associated.angleDeg = angle * 180/PI;
 }
@@ -47,29 +47,36 @@ void PenguinBody::Update(float dt) {
         return;
     }
 
-    if(inputManager.IsKeyDown(W_KEY)){
-        linearSpeed += PENGUIN_ACCELERATION*dt;
+    double accelSpeedGain = PENGUIN_ACCELERATION*dt;
+
+    if(inputManager.IsKeyDown(W_KEY) && (PENGUIN_MAX_LINEAR_SPEED-abs(linearSpeed) > accelSpeedGain)){
+        linearSpeed += accelSpeedGain;
     }
-    else if(inputManager.IsKeyDown(S_KEY)){
-        linearSpeed -= PENGUIN_ACCELERATION*dt;
+    else if(inputManager.IsKeyDown(S_KEY) && (PENGUIN_MAX_LINEAR_SPEED-abs(linearSpeed) > accelSpeedGain)){
+        linearSpeed -= accelSpeedGain;
     }
 
     if(inputManager.IsKeyDown(A_KEY)){
-        angleVariation = PENGUIN_ANGULAR_SPEED*dt;
-        angle += angleVariation;
-        associated.angleDeg = angle * 180/PI;
-        speed = speed.Rotate(angleVariation);
-    }
-    else if(inputManager.IsKeyDown(D_KEY)){
         angleVariation = PENGUIN_ANGULAR_SPEED*dt;
         angle -= angleVariation;
         associated.angleDeg = angle * 180/PI;
         speed = speed.Rotate(-angleVariation);
     }
+    else if(inputManager.IsKeyDown(D_KEY)){
+        angleVariation = PENGUIN_ANGULAR_SPEED*dt;
+        angle += angleVariation;
+        associated.angleDeg = angle * 180/PI;
+        speed = speed.Rotate(angleVariation);
+    }
 
-    if(linearSpeed != 0){
-        linearSpeed -= PENGUIN_ATRICT*dt;
-        associated.box += speed*linearSpeed;
+    double atrictSpeedLoss = PENGUIN_ATRICT*dt;
+
+    if(abs(linearSpeed) > atrictSpeedLoss){
+        linearSpeed -= (linearSpeed < 0)? -1*atrictSpeedLoss : atrictSpeedLoss;
+        associated.box += speed*linearSpeed*dt;
+    }
+    else{
+        linearSpeed = 0;
     }
 }
 

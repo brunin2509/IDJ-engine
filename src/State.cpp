@@ -8,6 +8,7 @@
 #include <Camera.h>
 #include <CameraFollower.h>
 #include <Alien.h>
+#include <PenguinBody.h>
 #include "State.h"
 #include "TileMap.h"
 
@@ -44,12 +45,24 @@ State::State(): music("./assets/audio/stageState.ogg"), quitRequested(false), st
     auto alienGO = new GameObject();
 
     auto alien = new Alien(*alienGO, 3);
+
+    alienGO->AddComponent(alien);
     alienGO->box = {512,300};
     alienGO->box.Centralize();
 
-    alienGO->AddComponent(alien);
-
     objectArray.emplace_back(alienGO);
+
+
+    // carrega o penguin
+    auto penguinGO = new GameObject();
+
+    auto penguin = new PenguinBody(*penguinGO);
+    penguinGO->AddComponent(penguin);
+    penguinGO->box.PlaceCenterAt(Vec2(704,640));
+
+    objectArray.emplace_back(penguinGO);
+
+    Camera::Follow(penguinGO);
 }
 
 State::~State() {
@@ -104,8 +117,13 @@ bool State::QuitRequested() {
 void State::Start() {
     LoadAssets();
 
-    for (auto &gameObjects : objectArray) {
-        gameObjects->Start();
+    for (int i = 0; i < objectArray.size(); i++) {
+        if(objectArray[i].get()){
+            objectArray[i]->Start();
+        }
+        else{ // if null...
+            std::cout << "shared_ptr contains a null reference to a GameObject inside objectArray\n";
+        }
     }
 
     started = true;

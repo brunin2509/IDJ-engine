@@ -9,7 +9,7 @@
 #include <Component.h>
 #include <memory>
 
-#define PENGUIN_BULLET_SPEED 500
+#define PENGUIN_BULLET_SPEED 600
 #define PENGUIN_BULLET_MAX_DAMAGE 20
 #define PENGUIN_BULLET_MAX_DISTANCE 1000
 

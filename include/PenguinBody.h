@@ -10,8 +10,9 @@
 #include "Component.h"
 #include "Vec2.h"
 
-#define PENGUIN_ACCELERATION 100 // em pixels/s^2
-#define PENGUIN_ATRICT 20 // em pixels/s^2
+#define PENGUIN_MAX_LINEAR_SPEED 500 // em pixels/s
+#define PENGUIN_ACCELERATION 1000 // em pixels/s^2
+#define PENGUIN_ATRICT 80 // em pixels/s^2
 #define PENGUIN_ANGULAR_SPEED PI // em rads/s
 
 class PenguinBody : public Component {

@@ -14,7 +14,7 @@ PenguinCannon::PenguinCannon(GameObject &associated, std::weak_ptr<GameObject> p
         pbody(penguinBody),
         angle(0){
 
-    auto sprite = new Sprite(associated, "cubngun.png");
+    auto sprite = new Sprite(associated, "./assets/img/cubngun.png");
     associated.AddComponent(sprite);
     associated.angleDeg = angle*180/PI;
 }
@@ -33,7 +33,7 @@ void PenguinCannon::Update(float dt) {
     angle = Vec2(inputManager.GetMouseX()+Camera::pos.x, inputManager.GetMouseY()+Camera::pos.y).InclinationOfDifference(associated.box.Center());
     associated.angleDeg = angle*180/PI;
 
-    if(inputManager.KeyPress(LEFT_MOUSE_BUTTON)){
+    if(inputManager.MousePress(LEFT_MOUSE_BUTTON)){
         Shoot();
     }
 }
@@ -47,6 +47,7 @@ bool PenguinCannon::Is(std::string type) {
 }
 
 void PenguinCannon::Shoot() {
+
     auto bulletGO = new GameObject();
 
     auto bullet = new Bullet(
@@ -57,11 +58,16 @@ void PenguinCannon::Shoot() {
             PENGUIN_BULLET_MAX_DISTANCE,
             "./assets/img/penguinbullet.png",
             4,
-            0.5);
+            0.1);
 
     bulletGO->AddComponent(bullet);
 
     bulletGO->box.PlaceCenterAt(associated.box.Center());
+
+    auto bulletPos = Vec2(associated.box.w/2,0);
+    bulletPos = bulletPos.Rotate(angle);
+
+    bulletGO->box += bulletPos;
 
     Game::GetInstance().GetState().AddObject(bulletGO);
 }

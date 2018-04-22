@@ -20,8 +20,8 @@ void Camera::Unfollow() {
 
 void Camera::Update(float dt) {
     if(focus){
-        pos.x = focus->box.Center().x - Game::GetInstance().GetWidth()/2;
-        pos.y = focus->box.Center().y - Game::GetInstance().GetHeight()/2;
+        pos.x = float(focus->box.Center().x - Game::GetInstance().GetWidth()/2.);
+        pos.y = float(focus->box.Center().y - Game::GetInstance().GetHeight()/2.);
     }
     else{
         // vetor inicial, inclinacao de 0 rad em relacao a x.
