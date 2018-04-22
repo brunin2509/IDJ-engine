@@ -17,16 +17,16 @@ Minion::Minion(GameObject &associated, std::weak_ptr<GameObject> alienCenter, fl
     sprite->SetScale(randScale, randScale);
     associated.AddComponent(sprite);
 
-    Vec2 initialPos(RADIUS, 0);
+    Vec2 initialPos(MINION_RADIUS, 0);
     initialPos = initialPos.Rotate(arcOffsetDeg);
     associated.box = this->alienCenter.box.Center() + initialPos;
     associated.box.Centralize();
 }
 
 void Minion::Update(float dt) {
-    Vec2 pos(RADIUS, 0);
+    Vec2 pos(MINION_RADIUS, 0);
 
-    arc += ANGULAR_SPEED*dt;
+    arc += MINION_ANGULAR_SPEED*dt;
 
     associated.angleDeg = (180/PI)*arc;
 
@@ -45,19 +45,20 @@ bool Minion::Is(std::string type) {
 
 void Minion::Shoot(Vec2 target) {
     auto bulletGO = new GameObject();
-    bulletGO->box = associated.box.Center();
 
     auto bullet = new Bullet(
             *bulletGO,
             target.InclinationOfDifference(associated.box.Center()),
-            BULLET_SPEED,
-            std::rand() % 11 + BULLET_MAX_DAMAGE - 10,
-            BULLET_MAX_DISTANCE,
+            MINION_BULLET_SPEED,
+            std::rand() % 11 + MINION_BULLET_MAX_DAMAGE - 10,
+            MINION_BULLET_MAX_DISTANCE,
             "./assets/img/minionbullet2.png",
             3,
-            0.5);
+            0.1);
 
     bulletGO->AddComponent(bullet);
+
+    bulletGO->box.PlaceCenterAt(associated.box.Center());
 
     Game::GetInstance().GetState().AddObject(bulletGO);
 }

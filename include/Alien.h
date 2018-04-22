@@ -13,7 +13,7 @@
 #include <memory>
 
 #define ALIEN_SPEED 300 // em pixels/s
-#define ALIEN__ANGULAR_SPEED -20 // em graus
+#define ALIEN_ANGULAR_SPEED -20 // em graus
 #define ALIEN_INITIAL_HP 30
 
 class Alien : public Component{

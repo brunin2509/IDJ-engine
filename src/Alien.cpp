@@ -47,7 +47,7 @@ void Alien::Update(float dt) {
         return;
     }
 
-    associated.angleDeg += ALIEN__ANGULAR_SPEED * dt;
+    associated.angleDeg += ALIEN_ANGULAR_SPEED * dt;
 
     if(inputManager.MousePress(LEFT_MOUSE_BUTTON)){
         taskQueue.push(Action(Action::SHOOT, mouseX + Camera::pos.x, mouseY + Camera::pos.y));

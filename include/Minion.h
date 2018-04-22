@@ -10,11 +10,11 @@
 #include "Component.h"
 #include "Vec2.h"
 
-#define ANGULAR_SPEED (PI/2) // em rad/s
-#define RADIUS 150 // em pixels
-#define BULLET_SPEED 100
-#define BULLET_MAX_DAMAGE 20
-#define BULLET_MAX_DISTANCE 1000
+#define MINION_ANGULAR_SPEED (PI/2) // em rad/s
+#define MINION_RADIUS 150 // em pixels
+#define MINION_BULLET_SPEED 500
+#define MINION_BULLET_MAX_DAMAGE 20
+#define MINION_BULLET_MAX_DISTANCE 1000
 
 class Minion : public Component {
 public:

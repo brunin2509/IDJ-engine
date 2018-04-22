@@ -13,7 +13,6 @@ Bullet::Bullet(GameObject &associated, float angle, float speed, int damage, flo
         damage(damage){
 
     auto spriteComponent = new Sprite(associated, sprite, frameCount, frameTime);
-    spriteComponent->SetScale(3,3);
 
     associated.AddComponent(spriteComponent);
 
