@@ -2,7 +2,7 @@
 // Created by bruno on 21/04/18.
 //
 
-#include "../src/PenguinCannon.h"
+#include "PenguinCannon.h"
 #include "Sprite.h"
 #include "InputManager.h"
 #include "Camera.h"
