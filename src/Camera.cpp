@@ -3,6 +3,7 @@
 //
 
 #include <InputManager.h>
+#include <Game.h>
 #include "Camera.h"
 
 Vec2 Camera::pos = {0,0};
@@ -19,7 +20,8 @@ void Camera::Unfollow() {
 
 void Camera::Update(float dt) {
     if(focus){
-        // todo when focused
+        pos.x = focus->box.Center().x - Game::GetInstance().GetWidth()/2;
+        pos.y = focus->box.Center().y - Game::GetInstance().GetHeight()/2;
     }
     else{
         // vetor inicial, inclinacao de 0 rad em relacao a x.

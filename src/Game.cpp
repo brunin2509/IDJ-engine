@@ -32,6 +32,9 @@ Game::Game(std::string title, int width, int height) : frameStart(0), dt(0.0) {
 
     instance = this;
 
+    this->width = width;
+    this->height = height;
+
     if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER)){
         cerr << "SDL_Init RETURNED ERROR: " << SDL_GetError();
         exit(1);
@@ -116,4 +119,12 @@ void Game::CalculateDeltaTime() {
 
 float Game::GetDeltaTime() {
     return dt;
+}
+
+int Game::GetWidth() {
+    return width;
+}
+
+int Game::GetHeight() {
+    return height;
 }
