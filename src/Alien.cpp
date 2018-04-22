@@ -59,8 +59,7 @@ void Alien::Update(float dt) {
     if(!taskQueue.empty()){
         auto task = taskQueue.front();
         if(task.type == Action::MOVE && task.pos.Distance(associated.box.Center()) <= ALIEN_SPEED*dt) {
-            associated.box = task.pos;
-            associated.box.Centralize();
+            associated.box.PlaceCenterAt(task.pos);
 
             speed = {0,0};
             taskQueue.pop();

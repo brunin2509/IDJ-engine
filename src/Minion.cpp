@@ -19,8 +19,7 @@ Minion::Minion(GameObject &associated, std::weak_ptr<GameObject> alienCenter, fl
 
     Vec2 initialPos(MINION_RADIUS, 0);
     initialPos = initialPos.Rotate(arcOffsetDeg);
-    associated.box = this->alienCenter.box.Center() + initialPos;
-    associated.box.Centralize();
+    associated.box.PlaceCenterAt(this->alienCenter.box.Center() + initialPos);
 }
 
 void Minion::Update(float dt) {
@@ -31,8 +30,7 @@ void Minion::Update(float dt) {
     associated.angleDeg = (180/PI)*arc;
 
     pos = pos.Rotate(arc);
-    associated.box = this->alienCenter.box.Center() + pos;
-    associated.box.Centralize();
+    associated.box.PlaceCenterAt(this->alienCenter.box.Center() + pos);
 }
 
 void Minion::Render() {

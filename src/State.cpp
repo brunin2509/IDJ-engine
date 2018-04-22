@@ -47,8 +47,7 @@ State::State(): music("./assets/audio/stageState.ogg"), quitRequested(false), st
     auto alien = new Alien(*alienGO, 3);
 
     alienGO->AddComponent(alien);
-    alienGO->box = {512,300};
-    alienGO->box.Centralize();
+    alienGO->box.PlaceCenterAt({512,300});
 
     objectArray.emplace_back(alienGO);
 
