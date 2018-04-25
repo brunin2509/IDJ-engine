@@ -27,6 +27,8 @@ public:
     bool Is(std::string type) override;
     void NotifyCollision(GameObject& other) override;
 
+    Vec2 GetCenter();
+
     static PenguinBody* player;
 
 private:

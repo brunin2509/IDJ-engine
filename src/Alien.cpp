@@ -3,24 +3,35 @@
 //
 
 #include <Sprite.h>
-#include <InputManager.h>
 #include <Camera.h>
 #include <Game.h>
 #include <Minion.h>
 #include <Collider.h>
 #include <Bullet.h>
 #include <Sound.h>
+#include <PenguinBody.h>
 #include "Alien.h"
 
-Alien::Alien(GameObject &associated, int nMinions): Component(associated), speed(0,0), hp(ALIEN_INITIAL_HP), nMinions(nMinions) {
+int Alien::alienCount = 0;
+
+Alien::Alien(GameObject &associated, int nMinions):
+        Component(associated),
+        speed(0,0),
+        hp(ALIEN_INITIAL_HP),
+        nMinions(nMinions),
+        state(RESTING),
+        restTimer(0),
+        destination(0,0) {
     associated.AddComponent(new Sprite(associated, "./assets/img/alien.png"));
     associated.AddComponent(new Collider(associated));
+    alienCount++;
 }
 
 Alien::~Alien(){
     // nao eh boa pratica desalocar a memoria de um shared_ptr por alguem que possui acesso so ao weak_ptr,
     // ja que esse ponteiro eh compartilhado. Deixe para o proprio shared_ptr deletar o objeto automaticamente.
     minionArray.clear();
+    alienCount--;
 }
 
 void Alien::Start() {
@@ -42,10 +53,6 @@ void Alien::Start() {
 }
 
 void Alien::Update(float dt) {
-    auto inputManager = InputManager::GetInstance();
-    auto mouseX = inputManager.GetMouseX();
-    auto mouseY = inputManager.GetMouseY();
-
     if(hp <= 0){
         associated.RequestDelete();
 
@@ -62,30 +69,23 @@ void Alien::Update(float dt) {
 
     associated.angleDeg += ALIEN_ANGULAR_SPEED * dt;
 
-    if(inputManager.MousePress(LEFT_MOUSE_BUTTON)){
-        taskQueue.push(Action(Action::SHOOT, mouseX + Camera::pos.x, mouseY + Camera::pos.y));
-    }
-    else if(inputManager.MousePress(RIGHT_MOUSE_BUTTON)){
-        taskQueue.push(Action(Action::MOVE, mouseX + Camera::pos.x, mouseY + Camera::pos.y));
-    }
-
-    if(!taskQueue.empty()){
-        auto task = taskQueue.front();
-        if(task.type == Action::MOVE && task.pos.Distance(associated.box.Center()) <= ALIEN_SPEED*dt) {
-            associated.box.PlaceCenterAt(task.pos);
-
-            speed = {0,0};
-            taskQueue.pop();
+    if(PenguinBody::player){
+        if(state == RESTING && restTimer.Get() < ALIEN_RESTING_TIME){
+            restTimer.Update(dt);
         }
-        else if(task.type == Action::MOVE){
-            if(speed.x == 0 && speed.y == 0){
-                speed = {ALIEN_SPEED*dt, 0};
-                speed = speed.Rotate(task.pos.InclinationOfDifference(associated.box.Center()));
-            }
+        else if(state == RESTING){
+            destination = PenguinBody::player->GetCenter();
 
-            associated.box += speed;;
+            speed = {1, 0};
+            speed = speed.Rotate(destination.InclinationOfDifference(associated.box.Center()));
+
+            state = MOVING;
         }
-        else if(task.type == Action::SHOOT){
+        else if(state == MOVING && destination.Distance(associated.box.Center()) <= ALIEN_SPEED*dt){
+            associated.box.PlaceCenterAt(destination);
+
+            destination = PenguinBody::player->GetCenter();
+
             if(nMinions > 0){
                 auto closestMinionGO = minionArray[0].lock();
                 auto minionGO = closestMinionGO;
@@ -93,19 +93,22 @@ void Alien::Update(float dt) {
                 for(int i = 1; i < nMinions; i++){
                     minionGO = minionArray[i].lock();
                     if(closestMinionGO.get() && minionGO.get()){ // verifica se os dois shared_ptrs estao preenchidos antes de mais nada
-                        closestMinionGO = (task.pos.Distance({minionGO->box.x,minionGO->box.y}) <
-                                           task.pos.Distance({closestMinionGO->box.x,closestMinionGO->box.y})) ? minionGO : closestMinionGO;
+                        closestMinionGO = (destination.Distance({minionGO->box.x,minionGO->box.y}) <
+                                           destination.Distance({closestMinionGO->box.x,closestMinionGO->box.y})) ? minionGO : closestMinionGO;
                     }
                 }
 
                 auto closestMinion = (Minion*) closestMinionGO->GetComponent("Minion");
-                closestMinion->Shoot(task.pos);
+                closestMinion->Shoot(destination);
             }
 
+            restTimer.Restart();
 
-            taskQueue.pop();
+            state = RESTING;
         }
-
+        else if(state == MOVING){
+            associated.box += speed*ALIEN_SPEED*dt;
+        }
     }
 }
 
@@ -122,9 +125,4 @@ void Alien::NotifyCollision(GameObject &other) {
     if(bullet && !bullet->targetsPlayer){
         hp -= bullet->GetDamage();
     }
-}
-
-Alien::Action::Action(Alien::Action::ActionType type, float x, float y) {
-    this->type = type;
-    pos = {x,y};
 }

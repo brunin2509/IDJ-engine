@@ -15,6 +15,7 @@
 #define ALIEN_SPEED 300 // em pixels/s
 #define ALIEN_ANGULAR_SPEED -20 // em graus
 #define ALIEN_INITIAL_HP 30
+#define ALIEN_RESTING_TIME 3
 
 class Alien : public Component{
 public:
@@ -27,22 +28,18 @@ public:
     bool Is(std::string type) override;
     void NotifyCollision(GameObject& other) override;
 
+    static int alienCount;
+
 private:
-    class Action{
-    public:
-        enum ActionType {MOVE, SHOOT};
-        Action(ActionType type, float x, float y);
-
-        ActionType type;
-        float x;
-        Vec2 pos;
-    };
-
     Vec2 speed;
     int hp;
     int nMinions;
 
-    std::queue<Action> taskQueue;
+    enum AlienState {MOVING, RESTING};
+    AlienState state;
+    Timer restTimer;
+    Vec2 destination;
+
     std::vector<std::weak_ptr<GameObject>> minionArray;
 };
 
