@@ -9,7 +9,7 @@
 
 Minion::Minion(GameObject &associated, std::weak_ptr<GameObject> alienCenter, float arcOffsetDeg):
         Component(associated),
-        alienCenter(*(alienCenter.lock())),
+        alienCenter(alienCenter),
         arc(arcOffsetDeg) {
 
     auto sprite = new Sprite(associated, "./assets/img/minion.png");
@@ -19,11 +19,27 @@ Minion::Minion(GameObject &associated, std::weak_ptr<GameObject> alienCenter, fl
 
     Vec2 initialPos(RADIUS, 0);
     initialPos = initialPos.Rotate(arcOffsetDeg);
-    associated.box = this->alienCenter.box.Center() + initialPos;
+
+    auto alienGO = alienCenter.lock();
+
+    if(!alienGO){
+        std::cout << "O ponteiro para o GameObject do Alien eh nullptr.\n";
+        associated.RequestDelete();
+        return;
+    }
+
+    associated.box = alienGO->box.Center() + initialPos;
     associated.box.Centralize();
 }
 
 void Minion::Update(float dt) {
+    auto alienGO = alienCenter.lock();
+
+    if(!alienGO){
+        associated.RequestDelete();
+        return;
+    }
+
     Vec2 pos(RADIUS, 0);
 
     arc += ANGULAR_SPEED*dt;
@@ -31,7 +47,7 @@ void Minion::Update(float dt) {
     associated.angleDeg = (180/PI)*arc;
 
     pos = pos.Rotate(arc);
-    associated.box = this->alienCenter.box.Center() + pos;
+    associated.box = alienGO->box.Center() + pos;
     associated.box.Centralize();
 }
 

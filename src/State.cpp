@@ -70,23 +70,14 @@ void State::Update(float dt) {
 
     // executa o update em cada um dos objetos no objectArray
     for (int i = 0; i < objectArray.size(); i++) {
-        if(objectArray[i].get()){
-            objectArray[i]->Update(dt);
-        }
-        else{ // if null...
-            std::cout << "shared_ptr contains a null reference to a GameObject inside objectArray\n";
-        }
+        objectArray[i]->Update(dt);
     }
 
     // depois de executar os updates, verifica se algum deles morreu
     for (int i = 0; i < objectArray.size(); i++) {
-        if(objectArray[i].get()){
-            if(objectArray[i]->IsDead()){
-                objectArray.erase(objectArray.begin() + i);
-            }
-        }
-        else{ // if null...
-            std::cout << "shared_ptr contains a null reference to a GameObject inside objectArray\n";
+        if(objectArray[i]->IsDead()){
+            objectArray.erase(objectArray.begin() + i);
+            i--;
         }
     }
 }
