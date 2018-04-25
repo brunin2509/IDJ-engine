@@ -22,7 +22,16 @@ Minion::Minion(GameObject &associated, std::weak_ptr<GameObject> alienCenter, fl
 
     Vec2 initialPos(MINION_RADIUS, 0);
     initialPos = initialPos.Rotate(arcOffsetDeg);
-    associated.box.PlaceCenterAt(this->alienCenter.lock()->box.Center() + initialPos);
+
+    auto alienGO = alienCenter.lock();
+
+    if(!alienGO){
+        std::cout << "O ponteiro para o GameObject do Alien eh nullptr.\n";
+        associated.RequestDelete();
+        return;
+    }
+
+    associated.box.PlaceCenterAt(alienGO->box.Center() + initialPos);
 }
 
 void Minion::Update(float dt) {
