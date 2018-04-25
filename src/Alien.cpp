@@ -7,14 +7,17 @@
 #include <Camera.h>
 #include <Game.h>
 #include <Minion.h>
+#include <Collider.h>
+#include <Bullet.h>
 #include "Alien.h"
 
 Alien::Alien(GameObject &associated, int nMinions): Component(associated), speed(0,0), hp(ALIEN_INITIAL_HP), nMinions(nMinions) {
     associated.AddComponent(new Sprite(associated, "./assets/img/alien.png"));
+    associated.AddComponent(new Collider(associated));
 }
 
 Alien::~Alien(){
-    // nao eh boa pratica desalocar a memoria de um shared_ptr por alguem que possui acesso soh ao weak_ptr,
+    // nao eh boa pratica desalocar a memoria de um shared_ptr por alguem que possui acesso so ao weak_ptr,
     // ja que esse ponteiro eh compartilhado. Deixe para o proprio shared_ptr deletar o objeto automaticamente.
     minionArray.clear();
 }
@@ -102,6 +105,13 @@ void Alien::Render() {
 
 bool Alien::Is(std::string type) {
     return type == "Alien";
+}
+
+void Alien::NotifyCollision(GameObject &other) {
+    auto bullet = (Bullet*) other.GetComponent("Bullet");
+    if(bullet){
+        hp -= bullet->GetDamage();
+    }
 }
 
 Alien::Action::Action(Alien::Action::ActionType type, float x, float y) {

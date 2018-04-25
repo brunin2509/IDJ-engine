@@ -25,6 +25,7 @@ public:
     void Update(float dt) override;
     void Render() override;
     bool Is(std::string type) override;
+    void NotifyCollision(GameObject& other) override;
 
 private:
     class Action{

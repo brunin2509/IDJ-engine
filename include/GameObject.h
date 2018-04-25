@@ -26,6 +26,7 @@ public:
     void RemoveComponent(Component* cpt);
     Component* GetComponent(std::string type);
     void Start();
+    void NotifyCollision(GameObject &other);
 
 private:
     std::vector<std::unique_ptr<Component>> components;

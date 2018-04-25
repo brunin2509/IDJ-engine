@@ -9,6 +9,8 @@
 #include <CameraFollower.h>
 #include <Alien.h>
 #include <PenguinBody.h>
+#include <Collider.h>
+#include <Collision.h>
 #include "State.h"
 #include "TileMap.h"
 
@@ -82,23 +84,36 @@ void State::Update(float dt) {
 
     // executa o update em cada um dos objetos no objectArray
     for (int i = 0; i < objectArray.size(); i++) {
-        if(objectArray[i].get()){
-            objectArray[i]->Update(dt);
+        objectArray[i]->Update(dt);
+    }
+
+    Collider* colliders[objectArray.size()];
+    bool collidersArrayFilled = false;
+
+    // verifica colisoes entre os objetos que sao Colliders
+    for (int i = 0; i < objectArray.size()-1; i++) {
+        if(!collidersArrayFilled){
+            colliders[i] = (Collider*)objectArray[i]->GetComponent("Collider");
         }
-        else{ // if null...
-            std::cout << "shared_ptr contains a null reference to a GameObject inside objectArray\n";
+
+        if(colliders[i]) {
+            for (int j = i+1; j < objectArray.size(); j++) {
+                if(!collidersArrayFilled){
+                    colliders[j] = (Collider*)objectArray[j]->GetComponent("Collider");
+                }
+                if(colliders[j] && Collision::IsColliding(colliders[i]->box, colliders[j]->box, objectArray[i]->angleDeg, objectArray[j]->angleDeg)){
+                    objectArray[i]->NotifyCollision(*objectArray[j]);
+                    objectArray[j]->NotifyCollision(*objectArray[i]);
+                }
+            }
+            collidersArrayFilled = true;
         }
     }
 
     // depois de executar os updates, verifica se algum deles morreu
     for (int i = 0; i < objectArray.size(); i++) {
-        if(objectArray[i].get()){
-            if(objectArray[i]->IsDead()){
-                objectArray.erase(objectArray.begin() + i);
-            }
-        }
-        else{ // if null...
-            std::cout << "shared_ptr contains a null reference to a GameObject inside objectArray\n";
+        if(objectArray[i]->IsDead()){
+            objectArray.erase(objectArray.begin() + i);
         }
     }
 }

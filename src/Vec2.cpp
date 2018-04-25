@@ -52,6 +52,20 @@ Vec2 Vec2::Rotate(float radians) {
     return {this->x*std::cos(radians) - this->y*std::sin(radians), this->y*std::cos(radians) + this->x*std::sin(radians)};
 }
 
+Vec2 Vec2::Norm(Vec2 v) {
+    return v.Normalized();
+}
+
+float Vec2::Dot(Vec2 a, Vec2 b) {
+    return a.x * b.x + a.y * b.y;
+}
+
+Vec2 Vec2::Rotate(Vec2 v, float radians) {
+    return v.Rotate(radians);
+}
+
+
+
 
 
 

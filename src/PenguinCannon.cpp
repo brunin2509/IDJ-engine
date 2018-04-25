@@ -2,6 +2,7 @@
 // Created by bruno on 21/04/18.
 //
 
+#include <Collider.h>
 #include "PenguinCannon.h"
 #include "Sprite.h"
 #include "InputManager.h"
@@ -16,17 +17,18 @@ PenguinCannon::PenguinCannon(GameObject &associated, std::weak_ptr<GameObject> p
 
     auto sprite = new Sprite(associated, "./assets/img/cubngun.png");
     associated.AddComponent(sprite);
+    associated.AddComponent(new Collider(associated));
     associated.angleDeg = angle*180/PI;
 }
 
 void PenguinCannon::Update(float dt) {
-    if(pbody.expired()){
+    auto inputManager = InputManager::GetInstance();
+    auto penguinBody = pbody.lock();
+
+    if(!penguinBody){
         associated.RequestDelete();
         return;
     }
-
-    auto inputManager = InputManager::GetInstance();
-    auto penguinBody = pbody.lock();
 
     associated.box.PlaceCenterAt(penguinBody->box.Center());
 
@@ -70,4 +72,8 @@ void PenguinCannon::Shoot() {
     bulletGO->box += bulletPos;
 
     Game::GetInstance().GetState().AddObject(bulletGO);
+}
+
+void PenguinCannon::NotifyCollision(GameObject &other) {
+    // todo?
 }

@@ -1,10 +1,10 @@
+.Como os minions desaparecem quando o Alien morre? (mesmo com AlienCenter sendo somente um ponteiro comum)
+
+
+
+
 .Refactor de centralizacao?
-
-
-
-
-
-
+    -sim
 .POR QUE CARALHOS NAO SE PODE COLOCAR INPUTMANAGER NUMA VARIAVEL???????????
     -problema de static/singleton no runtime do C++
 .t5: alienCenter eh um weak_ptr mesmo?

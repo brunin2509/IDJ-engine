@@ -5,11 +5,12 @@
 #include <Sprite.h>
 #include <Bullet.h>
 #include <Game.h>
+#include <Collider.h>
 #include "Minion.h"
 
 Minion::Minion(GameObject &associated, std::weak_ptr<GameObject> alienCenter, float arcOffsetDeg):
         Component(associated),
-        alienCenter(*(alienCenter.lock())),
+        alienCenter(alienCenter),
         arc(arcOffsetDeg) {
 
     auto sprite = new Sprite(associated, "./assets/img/minion.png");
@@ -17,12 +18,21 @@ Minion::Minion(GameObject &associated, std::weak_ptr<GameObject> alienCenter, fl
     sprite->SetScale(randScale, randScale);
     associated.AddComponent(sprite);
 
+    associated.AddComponent(new Collider(associated));
+
     Vec2 initialPos(MINION_RADIUS, 0);
     initialPos = initialPos.Rotate(arcOffsetDeg);
-    associated.box.PlaceCenterAt(this->alienCenter.box.Center() + initialPos);
+    associated.box.PlaceCenterAt(this->alienCenter.lock()->box.Center() + initialPos);
 }
 
 void Minion::Update(float dt) {
+    auto alienGO = alienCenter.lock();
+
+    if(!alienGO){
+        associated.RequestDelete();
+        return;
+    }
+
     Vec2 pos(MINION_RADIUS, 0);
 
     arc += MINION_ANGULAR_SPEED*dt;
@@ -30,7 +40,7 @@ void Minion::Update(float dt) {
     associated.angleDeg = (180/PI)*arc;
 
     pos = pos.Rotate(arc);
-    associated.box.PlaceCenterAt(this->alienCenter.box.Center() + pos);
+    associated.box.PlaceCenterAt(alienGO->box.Center() + pos);
 }
 
 void Minion::Render() {
@@ -59,4 +69,8 @@ void Minion::Shoot(Vec2 target) {
     bulletGO->box.PlaceCenterAt(associated.box.Center());
 
     Game::GetInstance().GetState().AddObject(bulletGO);
+}
+
+void Minion::NotifyCollision(GameObject &other) {
+    // todo?
 }

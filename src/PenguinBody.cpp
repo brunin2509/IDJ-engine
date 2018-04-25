@@ -5,6 +5,9 @@
 #include <Sprite.h>
 #include <Game.h>
 #include <InputManager.h>
+#include <Collider.h>
+#include <Bullet.h>
+#include <Camera.h>
 #include "PenguinBody.h"
 #include "PenguinCannon.h"
 
@@ -22,6 +25,7 @@ PenguinBody::PenguinBody(GameObject &associated) :
 
     auto sprite = new Sprite(associated, "./assets/img/penguin.png");
     associated.AddComponent(sprite);
+    associated.AddComponent(new Collider(associated));
     associated.angleDeg = angle * 180/PI;
 }
 
@@ -44,6 +48,7 @@ void PenguinBody::Update(float dt) {
     if(hp <= 0){
         associated.RequestDelete();
         pcannon.lock()->RequestDelete();
+        Camera::Unfollow();
         return;
     }
 
@@ -86,5 +91,12 @@ void PenguinBody::Render() {
 
 bool PenguinBody::Is(std::string type) {
     return type == "PenguinBody";
+}
+
+void PenguinBody::NotifyCollision(GameObject &other) {
+    auto bullet = (Bullet*) other.GetComponent("Bullet");
+    if(bullet){
+        hp -= bullet->GetDamage();
+    }
 }
 

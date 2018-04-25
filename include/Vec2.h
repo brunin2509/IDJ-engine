@@ -25,6 +25,10 @@ public:
     float InclinationOfDifference(Vec2 v2);
     Vec2 Rotate(float radians);
 
+    static Vec2 Norm(Vec2 v);
+    static float Dot(Vec2 a, Vec2 b);
+    static Vec2 Rotate(Vec2 v, float radians);
+
 };
 
 
