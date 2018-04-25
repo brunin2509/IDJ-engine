@@ -10,13 +10,14 @@
 #include "SDL_include.h"
 #include "Component.h"
 #include "GameObject.h"
+#include "Timer.h"
 #include <iostream>
 
 class Sprite: public Component {
 public:
     explicit Sprite(GameObject& associated);
-    Sprite(GameObject& associated, std::string file);
-    Sprite(GameObject& associated, std::string file, int frameCount, float frameTime);
+    Sprite(GameObject& associated, std::string file, float secondsToSelfDestruct = 0);
+    Sprite(GameObject& associated, std::string file, int frameCount, float frameTime, float secondsToSelfDestruct = 0);
     ~Sprite() override;
 
     void Open(std::string file);
@@ -45,6 +46,9 @@ private:
     int currentFrame;
     float timeElapsed;
     float frameTime;
+    Timer selfDestructCount;
+    float secondsToSelfDestruct;
+
     void SetClipToNewFrame();
 };
 

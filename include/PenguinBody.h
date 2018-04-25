@@ -12,8 +12,9 @@
 
 #define PENGUIN_MAX_LINEAR_SPEED 500 // em pixels/s
 #define PENGUIN_ACCELERATION 1000 // em pixels/s^2
-#define PENGUIN_ATRICT 80 // em pixels/s^2
+#define PENGUIN_ATRICT 150 // em pixels/s^2
 #define PENGUIN_ANGULAR_SPEED PI // em rads/s
+#define PENGUIN_INITIAL_HP 30
 
 class PenguinBody : public Component {
 public:

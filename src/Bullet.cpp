@@ -6,12 +6,13 @@
 #include <Collider.h>
 #include "Bullet.h"
 
-Bullet::Bullet(GameObject &associated, float angle, float speed, int damage, float maxDistance, std::string sprite, int frameCount, float frameTime) :
+Bullet::Bullet(GameObject &associated, float angle, float speed, int damage, float maxDistance, std::string sprite, int frameCount, float frameTime, bool targetsPlayer) :
         Component(associated),
         speed(speed,0),
         speedMagnitude(speed),
         distanceLeft(maxDistance),
-        damage(damage){
+        damage(damage),
+        targetsPlayer(targetsPlayer){
 
     auto spriteComponent = new Sprite(associated, sprite, frameCount, frameTime);
 
@@ -48,23 +49,7 @@ int Bullet::GetDamage() {
 }
 
 void Bullet::NotifyCollision(GameObject &other) {
-//    if(other.GetComponent("Alien") || other.GetComponent("Minion") || other.GetComponent("PenguinBody") || other.GetComponent("PenguinCannon")){
-//        associated.RequestDelete();
-//    }
-
-    if(other.GetComponent("Alien")){
-        std::cout << "bullet hit alien\n";
-    }
-
-    if(other.GetComponent("Minion")){
-        std::cout << "bullet hit minion\n";
-    }
-
-    if(other.GetComponent("PenguinBody")){
-        std::cout << "bullet hit penguin body\n";
-    }
-
-    if(other.GetComponent("PenguinCannon")){
-        std::cout << "bullet hit penguin cannon\n";
+    if(other.GetComponent("Alien") && !targetsPlayer || other.GetComponent("PenguinBody") && targetsPlayer ){
+        associated.RequestDelete();
     }
 }

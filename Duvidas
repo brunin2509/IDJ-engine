@@ -1,5 +1,5 @@
 .Como os minions desaparecem quando o Alien morre? (mesmo com AlienCenter sendo somente um ponteiro comum)
-
+    -Eles nao desapareceram, eles so mudaram de objeto depois que o Alien morreu
 
 
 

@@ -13,7 +13,8 @@
 PenguinCannon::PenguinCannon(GameObject &associated, std::weak_ptr<GameObject> penguinBody):
         Component(associated),
         pbody(penguinBody),
-        angle(0){
+        angle(0),
+        cooldownTimer(PENGUIN_SHOOTING_COLLDOWN){
 
     auto sprite = new Sprite(associated, "./assets/img/cubngun.png");
     associated.AddComponent(sprite);
@@ -35,8 +36,11 @@ void PenguinCannon::Update(float dt) {
     angle = Vec2(inputManager.GetMouseX()+Camera::pos.x, inputManager.GetMouseY()+Camera::pos.y).InclinationOfDifference(associated.box.Center());
     associated.angleDeg = angle*180/PI;
 
-    if(inputManager.MousePress(LEFT_MOUSE_BUTTON)){
+    cooldownTimer.Update(dt);
+
+    if(inputManager.MousePress(LEFT_MOUSE_BUTTON) && cooldownTimer.Get() > PENGUIN_SHOOTING_COLLDOWN){
         Shoot();
+        cooldownTimer.Restart();
     }
 }
 

@@ -8,10 +8,12 @@
 
 #include <Component.h>
 #include <memory>
+#include "Timer.h"
 
 #define PENGUIN_BULLET_SPEED 600
-#define PENGUIN_BULLET_MAX_DAMAGE 20
+#define PENGUIN_BULLET_MAX_DAMAGE 30
 #define PENGUIN_BULLET_MAX_DISTANCE 1000
+#define PENGUIN_SHOOTING_COLLDOWN 1
 
 class PenguinCannon : public Component {
 public:
@@ -27,6 +29,7 @@ public:
 private:
     std::weak_ptr<GameObject> pbody;
     float angle;
+    Timer cooldownTimer;
 };
 
 

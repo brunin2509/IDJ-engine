@@ -71,7 +71,8 @@ void Minion::Shoot(Vec2 target) {
             MINION_BULLET_MAX_DISTANCE,
             "./assets/img/minionbullet2.png",
             3,
-            0.1);
+            0.1,
+            true);
 
     bulletGO->AddComponent(bullet);
 

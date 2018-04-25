@@ -8,6 +8,7 @@
 #include <Collider.h>
 #include <Bullet.h>
 #include <Camera.h>
+#include <Sound.h>
 #include "PenguinBody.h"
 #include "PenguinCannon.h"
 
@@ -19,7 +20,7 @@ PenguinBody::PenguinBody(GameObject &associated) :
         speed(1,0),
         linearSpeed(0),
         angle(0),
-        hp(100){
+        hp(PENGUIN_INITIAL_HP){
 
     player = this;
 
@@ -49,6 +50,15 @@ void PenguinBody::Update(float dt) {
         associated.RequestDelete();
         pcannon.lock()->RequestDelete();
         Camera::Unfollow();
+
+        auto explosionGO = new GameObject();
+        auto explosionSound = new Sound(*explosionGO, "./assets/audio/boom.wav");
+        explosionGO->AddComponent(new Sprite(*explosionGO, "./assets/img/penguindeath.png", 5, 0.1, 1.5));
+        explosionGO->AddComponent(explosionSound);
+        explosionSound->Play();
+        explosionGO->box.PlaceCenterAt(associated.box.Center());
+        Game::GetInstance().GetState().AddObject(explosionGO);
+
         return;
     }
 
@@ -95,7 +105,7 @@ bool PenguinBody::Is(std::string type) {
 
 void PenguinBody::NotifyCollision(GameObject &other) {
     auto bullet = (Bullet*) other.GetComponent("Bullet");
-    if(bullet){
+    if(bullet && bullet->targetsPlayer){
         hp -= bullet->GetDamage();
     }
 }

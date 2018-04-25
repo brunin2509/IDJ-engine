@@ -9,6 +9,7 @@
 #include <Minion.h>
 #include <Collider.h>
 #include <Bullet.h>
+#include <Sound.h>
 #include "Alien.h"
 
 Alien::Alien(GameObject &associated, int nMinions): Component(associated), speed(0,0), hp(ALIEN_INITIAL_HP), nMinions(nMinions) {
@@ -47,6 +48,15 @@ void Alien::Update(float dt) {
 
     if(hp <= 0){
         associated.RequestDelete();
+
+        auto explosionGO = new GameObject();
+        auto explosionSound = new Sound(*explosionGO, "./assets/audio/boom.wav");
+        explosionGO->AddComponent(new Sprite(*explosionGO, "./assets/img/aliendeath.png", 4, 0.1, 1.6));
+        explosionGO->AddComponent(explosionSound);
+        explosionSound->Play();
+        explosionGO->box.PlaceCenterAt(associated.box.Center());
+        Game::GetInstance().GetState().AddObject(explosionGO);
+
         return;
     }
 
@@ -109,7 +119,7 @@ bool Alien::Is(std::string type) {
 
 void Alien::NotifyCollision(GameObject &other) {
     auto bullet = (Bullet*) other.GetComponent("Bullet");
-    if(bullet){
+    if(bullet && !bullet->targetsPlayer){
         hp -= bullet->GetDamage();
     }
 }

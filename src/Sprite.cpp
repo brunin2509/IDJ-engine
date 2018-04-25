@@ -17,14 +17,16 @@ Sprite::Sprite(GameObject &associated) :
         currentFrame(0),
         timeElapsed(0),
         frameCount(1),
-        frameTime(1){
+        frameTime(1),
+        selfDestructCount(0){
 }
 
-Sprite::Sprite(GameObject &associated, std::string file) : Sprite(associated){
+Sprite::Sprite(GameObject &associated, std::string file, float secondsToSelfDestruct): Sprite(associated) {
     Open(file);
+    this->secondsToSelfDestruct = secondsToSelfDestruct;
 }
 
-Sprite::Sprite(GameObject &associated, std::string file, int frameCount, float frameTime): Sprite(associated, file) {
+Sprite::Sprite(GameObject &associated, std::string file, int frameCount, float frameTime, float secondsToSelfDestruct): Sprite(associated, file, secondsToSelfDestruct) {
     SetFrameTime(frameTime);
     SetFrameCount(frameCount);
 }
@@ -85,12 +87,22 @@ bool Sprite::IsOpen() {
 }
 
 void Sprite::Update(float dt) {
-    timeElapsed += dt;
+    if(secondsToSelfDestruct > 0){
+        selfDestructCount.Update(dt);
+        if(selfDestructCount.Get() > secondsToSelfDestruct){
+            associated.RequestDelete();
+            return;
+        }
+    }
 
-    if(timeElapsed > frameTime){
-        timeElapsed -= frameTime;
-        currentFrame++;
-        SetClipToNewFrame();
+    if(frameCount > 1){ // esse processo so faz sentido para sprites com mais de um frame (nao estaticas)
+        timeElapsed += dt;
+
+        if(timeElapsed > frameTime){
+            timeElapsed -= frameTime;
+            currentFrame++;
+            SetClipToNewFrame();
+        }
     }
 }
 
