@@ -43,7 +43,7 @@ void GameObject::AddComponent(Component* cpt) {
 void GameObject::RemoveComponent(Component* cpt) {
     std::unique_ptr<Component>& component = *(new std::unique_ptr<Component>(cpt));
 
-    for (int i = 0; i < this->components.size(); i++) {
+    for (unsigned i = 0; i < this->components.size(); i++) {
         if(this->components[i] == component){
             this->components.erase(this->components.begin() + i);
         }

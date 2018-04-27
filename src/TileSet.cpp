@@ -23,7 +23,7 @@ void TileSet::RenderTile(unsigned index, float x, float y) {
     if((int) index == -1){ //in case its an empty tile //todo: THIS IS SOOOO SPECIFIC!!
         tileSet.SetClip((columns-1)*tileWidth, (rows-1)*tileHeight, tileHeight, tileHeight);
     }
-    else if(index >= rows*columns){ //its not necessary to check whether index < 0, because its unsigned
+    else if(index >= (unsigned) rows*columns){ //its not necessary to check whether index < 0, because its unsigned
         cerr << "THE INDEX FOR THE TILE IS NOT VALID. \n";
         exit(1);
     }

@@ -72,7 +72,7 @@ void State::Update(float dt) {
     }
 
     // depois de executar os updates, verifica se algum deles morreu
-    for (int i = 0; i < objectArray.size(); i++) {
+    for (unsigned i = 0; i < objectArray.size(); i++) {
         if(objectArray[i]->IsDead()){
             objectArray.erase(objectArray.begin() + i);
         }
