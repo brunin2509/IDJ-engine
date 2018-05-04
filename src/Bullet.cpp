@@ -8,9 +8,9 @@
 Bullet::Bullet(GameObject &associated, float angle, float speed, int damage, float maxDistance, std::string sprite) :
         Component(associated),
         speed(speed,0),
-        speedMagnitude(speed),
         distanceLeft(maxDistance),
-        damage(damage){
+        damage(damage),
+        speedMagnitude(speed){
 
     associated.AddComponent(new Sprite(associated, sprite));
 

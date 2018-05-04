@@ -69,7 +69,7 @@ void State::Update(float dt) {
     quitRequested =  inputManager.KeyPress(ESCAPE_KEY) || inputManager.QuitRequested();
 
     // executa o update em cada um dos objetos no objectArray
-    for (int i = 0; i < objectArray.size(); i++) {
+    for (unsigned i = 0; i < objectArray.size(); i++) {
         objectArray[i]->Update(dt);
     }
 

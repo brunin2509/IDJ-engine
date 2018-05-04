@@ -5,7 +5,7 @@
 #include <typeinfo>
 #include "GameObject.h"
 
-GameObject::GameObject(): isDead(false), started(false), box(0,0,0,0), angleDeg(0) {
+GameObject::GameObject(): box(0,0,0,0), angleDeg(0), isDead(false), started(false) {
 }
 
 GameObject::~GameObject() {
