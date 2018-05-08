@@ -5,7 +5,7 @@
 #include <typeinfo>
 #include "GameObject.h"
 
-GameObject::GameObject(): isDead(false), started(false), box(0,0,0,0), angleDeg(0) {
+GameObject::GameObject(): box(0,0,0,0), angleDeg(0), isDead(false), started(false) {
 }
 
 GameObject::~GameObject() {
@@ -46,7 +46,7 @@ void GameObject::AddComponent(Component* cpt) {
 void GameObject::RemoveComponent(Component* cpt) {
     std::unique_ptr<Component>& component = *(new std::unique_ptr<Component>(cpt));
 
-    for (int i = 0; i < this->components.size(); i++) {
+    for (unsigned i = 0; i < this->components.size(); i++) {
         if(this->components[i] == component){
             this->components.erase(this->components.begin() + i);
         }

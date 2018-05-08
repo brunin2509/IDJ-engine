@@ -83,7 +83,7 @@ void State::Update(float dt) {
     quitRequested =  inputManager.KeyPress(ESCAPE_KEY) || inputManager.QuitRequested();
 
     // executa o update em cada um dos objetos no objectArray
-    for (int i = 0; i < objectArray.size(); i++) {
+    for (unsigned i = 0; i < objectArray.size(); i++) {
         objectArray[i]->Update(dt);
     }
 
@@ -91,7 +91,7 @@ void State::Update(float dt) {
     bool collidersArrayFilled = false;
 
     // verifica colisoes entre os objetos que sao Colliders
-    for (int i = 0; i < objectArray.size()-1; i++) {
+    for (unsigned i = 0; i < objectArray.size()-1; i++) {
         if(!collidersArrayFilled){
             colliders[i] = (Collider*)objectArray[i]->GetComponent("Collider");
         }
@@ -111,7 +111,7 @@ void State::Update(float dt) {
     }
 
     // depois de executar os updates, verifica se algum deles morreu
-    for (int i = 0; i < objectArray.size(); i++) {
+    for (unsigned i = 0; i < objectArray.size(); i++) {
         if(objectArray[i]->IsDead()){
             objectArray.erase(objectArray.begin() + i);
             i--;
