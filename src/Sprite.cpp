@@ -14,9 +14,9 @@ Sprite::Sprite(GameObject &associated) :
         width(0),
         height(0),
         scale(1,1),
+        frameCount(1),
         currentFrame(0),
         timeElapsed(0),
-        frameCount(1),
         frameTime(1),
         selfDestructCount(0){
 }
