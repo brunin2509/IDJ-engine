@@ -8,11 +8,11 @@
 
 Bullet::Bullet(GameObject &associated, float angle, float speed, int damage, float maxDistance, std::string sprite, int frameCount, float frameTime, bool targetsPlayer) :
         Component(associated),
+        targetsPlayer(targetsPlayer),
         speed(speed,0),
-        speedMagnitude(speed),
         distanceLeft(maxDistance),
         damage(damage),
-        targetsPlayer(targetsPlayer){
+        speedMagnitude(speed){
 
     auto spriteComponent = new Sprite(associated, sprite, frameCount, frameTime);
 
