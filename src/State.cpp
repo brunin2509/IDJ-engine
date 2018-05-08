@@ -87,7 +87,8 @@ void State::Update(float dt) {
         objectArray[i]->Update(dt);
     }
 
-    Collider* colliders[objectArray.size()];
+//    Collider* colliders[objectArray.size()];
+    std::vector<Collider*> colliders(objectArray.size(), nullptr);
     bool collidersArrayFilled = false;
 
     // verifica colisoes entre os objetos que sao Colliders
@@ -97,7 +98,7 @@ void State::Update(float dt) {
         }
 
         if(colliders[i]) {
-            for (int j = i+1; j < objectArray.size(); j++) {
+            for (unsigned j = i+1; j < objectArray.size(); j++) {
                 if(!collidersArrayFilled){
                     colliders[j] = (Collider*)objectArray[j]->GetComponent("Collider");
                 }
@@ -132,7 +133,7 @@ bool State::QuitRequested() {
 void State::Start() {
     LoadAssets();
 
-    for (int i = 0; i < objectArray.size(); i++) {
+    for (unsigned i = 0; i < objectArray.size(); i++) {
         if(objectArray[i].get()){
             objectArray[i]->Start();
         }
