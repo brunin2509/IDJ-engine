@@ -7,17 +7,20 @@
 
 #define INCLUDE_SDL
 #include "SDL_include.h"
-#include "State.h"
+#include "StageState.h"
 
 class Game {
 public:
     ~Game();
+
+    static Game& GetInstance();
+    SDL_Renderer* GetRenderer();
+    StageState& GetState();
+
     void Run( );
+    
     float GetDeltaTime();
 
-    SDL_Renderer* GetRenderer();
-    State& GetState();
-    static Game& GetInstance();
     int GetWidth();
     int GetHeight();
 
@@ -27,7 +30,7 @@ private:
     static Game* instance;
     SDL_Window* window;
     SDL_Renderer* renderer;
-    State* state;
+    StageState* state;
 
     int frameStart;
     float dt;

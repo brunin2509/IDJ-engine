@@ -11,10 +11,10 @@
 #include <PenguinBody.h>
 #include <Collider.h>
 #include <Collision.h>
-#include "State.h"
+#include "StageState.h"
 #include "TileMap.h"
 
-State::State(): music("./assets/audio/stageState.ogg"), quitRequested(false), started(false) {
+StageState::StageState(): music("./assets/audio/stageState.ogg"), quitRequested(false), started(false) {
     music.Play();
 
     // carrega variaveis relativas ao background
@@ -66,14 +66,14 @@ State::State(): music("./assets/audio/stageState.ogg"), quitRequested(false), st
     Camera::Follow(penguinGO);
 }
 
-State::~State() {
+StageState::~StageState() {
     objectArray.clear();
 }
 
-void State::LoadAssets() {
+void StageState::LoadAssets() {
 }
 
-void State::Update(float dt) {
+void StageState::Update(float dt) {
     auto inputManager = InputManager::GetInstance();
 
     // atualiza a camera e a box do GameObject do mapa (lembrando novamente que o GO do mapa esta no indice 1)
@@ -120,17 +120,17 @@ void State::Update(float dt) {
     }
 }
 
-void State::Render() {
+void StageState::Render() {
     for (auto &gameObjects : objectArray) {
         gameObjects->Render();
     }
 }
 
-bool State::QuitRequested() {
+bool StageState::QuitRequested() {
     return quitRequested;
 }
 
-void State::Start() {
+void StageState::Start() {
     LoadAssets();
 
     for (unsigned i = 0; i < objectArray.size(); i++) {
@@ -145,7 +145,7 @@ void State::Start() {
     started = true;
 }
 
-std::weak_ptr<GameObject> State::AddObject(GameObject *go) {
+std::weak_ptr<GameObject> StageState::AddObject(GameObject *go) {
     std::shared_ptr<GameObject> sharedGO(go);
 
     objectArray.push_back(sharedGO);
@@ -156,7 +156,7 @@ std::weak_ptr<GameObject> State::AddObject(GameObject *go) {
     return std::weak_ptr<GameObject>(sharedGO);
 }
 
-std::weak_ptr<GameObject> State::GetObjectPtr(GameObject *go) {
+std::weak_ptr<GameObject> StageState::GetObjectPtr(GameObject *go) {
     for(auto& it : objectArray){
         if(it.get() == go){
             return std::weak_ptr<GameObject>(it);

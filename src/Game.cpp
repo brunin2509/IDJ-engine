@@ -72,7 +72,7 @@ Game::Game(std::string title, int width, int height) : frameStart(0), dt(0.0) {
         exit(1);
     }
 
-    state = new State();
+    state = new StageState();
 }
 
 Game::~Game() {
@@ -85,7 +85,7 @@ Game::~Game() {
     SDL_Quit();
 }
 
-State& Game::GetState() {
+StageState& Game::GetState() {
     return *state;
 }
 

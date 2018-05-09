@@ -13,10 +13,10 @@
 #include "Sprite.h"
 #include "Music.h"
 
-class State {
+class StageState {
 public:
-    State();
-    ~State();
+    StageState();
+    ~StageState();
 
     bool QuitRequested();
     void LoadAssets();

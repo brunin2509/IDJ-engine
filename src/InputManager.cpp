@@ -26,7 +26,7 @@ void InputManager::Update() {
     SDL_GetMouseState(&mouseX, &mouseY);
 
     // Reseta o quitRequested (se ele foi setado antes e o game nao encerrou,
-    // eh porque State deve ter feito algum tratamento especial)
+    // eh porque StageState deve ter feito algum tratamento especial)
     quitRequested = false;
 
     // Incrementa o frame
