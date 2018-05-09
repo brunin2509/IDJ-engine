@@ -15,7 +15,7 @@ public:
     ~State();
 
     virtual void LoadAssets() = 0;
-    virtual void Update() = 0;
+    virtual void Update(float dt) = 0;
     virtual void Render() = 0;
 
     virtual void Start() = 0;

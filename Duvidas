@@ -9,7 +9,7 @@
     -problema de static/singleton no runtime do C++
 .t5: alienCenter eh um weak_ptr mesmo?
     -sim
-.Por que o uso de range-based loop no update do state falha? (acessa um item que eh nulo) (SIM, DOIS TIPOS DE FOR TEM COMPORTAMENTOS DIFERENTES, O QUE EH BIZAROO!!)
+.Por que o uso de range-based loop no update do storedState falha? (acessa um item que eh nulo) (SIM, DOIS TIPOS DE FOR TEM COMPORTAMENTOS DIFERENTES, O QUE EH BIZAROO!!)
     -nao se pode alterar a lista durante um loop com iterator
 .O que fazer com o GO que sera passado para TileSet?
     -no one knows
@@ -20,7 +20,7 @@
 .Como evitar dependencia circular?
     -https://stackoverflow.com/questions/625799/resolve-build-errors-due-to-circular-dependency-amongst-classes
     -https://stackoverflow.com/questions/346058/c-class-header-files-organization
-.Como inicializar o bg no state???
+.Como inicializar o bg no storedState???
     -bg nao precisa existir mais como propriedade
 .O que fazer exatamente fazer com o destrutor do Component? (no constructor, eh soh pra passar o associated?)
     -default. Aparentemente sim.

@@ -72,11 +72,22 @@ Game::Game(std::string title, int width, int height) : frameStart(0), dt(0.0) {
         exit(1);
     }
 
-    state = new StageState();
+    storedState = nullptr;
 }
 
 Game::~Game() {
-    delete state;
+    if(storedState){
+        delete storedState;
+    }
+
+    while(!stateStack.empty()){
+        stateStack.pop();
+    }
+
+    Resources::ClearImages();
+    Resources::ClearMusics();
+    Resources::ClearSounds();
+
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     Mix_CloseAudio();
@@ -85,25 +96,49 @@ Game::~Game() {
     SDL_Quit();
 }
 
-StageState& Game::GetState() {
-    return *state;
+State& Game::GetCurrentState() {
+    return *(stateStack.top());
 }
 
 SDL_Renderer* Game::GetRenderer() {
     return renderer;
 }
 
+void Game::Push(State *state) {
+    storedState = state;
+}
+
 void Game::Run() {
 //    LIXO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //    auto inputManager = InputManager::GetInstance();
 
-    state->Start();
+    if(!storedState){
+        std::cout << "No initial state set. Quiting game...\n";
+        return;
+    }
 
-    while(!state->QuitRequested()){
+    stateStack.emplace(storedState);
+    storedState = nullptr;
+
+    while(!stateStack.top()->QuitRequested() && !stateStack.empty()){
+        if(stateStack.top()->PopRequested()){
+            stateStack.pop();
+            if(stateStack.top()){
+                stateStack.top()->Resume();
+            }
+        }
+
+        if(storedState){
+            stateStack.top()->Pause();
+            stateStack.emplace(storedState);
+            storedState->Start();
+            storedState = nullptr;
+        }
+
         CalculateDeltaTime();
         InputManager::GetInstance().Update();
-        state->Update(dt);
-        state->Render();
+        storedState->Update(dt);
+        storedState->Render();
         SDL_RenderPresent(renderer);
         SDL_Delay(33);
     }
