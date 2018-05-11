@@ -14,8 +14,8 @@
 #include "StageState.h"
 #include "TileMap.h"
 
-StageState::StageState(): music("./assets/audio/stageState.ogg"), quitRequested(false), started(false) {
-    music.Play();
+StageState::StageState(): State(), backgroundMusic("./assets/audio/stageState.ogg") {
+    backgroundMusic.Play();
 
     // carrega variaveis relativas ao background
     auto bgGO = new GameObject();
@@ -34,7 +34,7 @@ StageState::StageState(): music("./assets/audio/stageState.ogg"), quitRequested(
     auto mapGO = new GameObject();
     mapGO->box = {0,0};
 
-    auto tileSet = new TileSet(64, 64, "./assets/img/tileset.png");
+    tileSet = new TileSet(64, 64, "./assets/img/tileset.png");
     auto tileMap = new TileMap(*mapGO, ".assets/map/tileMap.txt", tileSet);
 
     mapGO->AddComponent(tileMap);
@@ -67,6 +67,9 @@ StageState::StageState(): music("./assets/audio/stageState.ogg"), quitRequested(
 }
 
 StageState::~StageState() {
+    if(tileSet){
+        delete tileSet;
+    }
     objectArray.clear();
 }
 
@@ -83,11 +86,9 @@ void StageState::Update(float dt) {
     quitRequested =  inputManager.KeyPress(ESCAPE_KEY) || inputManager.QuitRequested();
 
     // executa o update em cada um dos objetos no objectArray
-    for (unsigned i = 0; i < objectArray.size(); i++) {
-        objectArray[i]->Update(dt);
-    }
+    UpdateArray(dt);
 
-//    Collider* colliders[objectArray.size()];
+    // Collider* colliders[objectArray.size()];
     std::vector<Collider*> colliders(objectArray.size(), nullptr);
     bool collidersArrayFilled = false;
 
@@ -121,49 +122,13 @@ void StageState::Update(float dt) {
 }
 
 void StageState::Render() {
-    for (auto &gameObjects : objectArray) {
-        gameObjects->Render();
-    }
-}
-
-bool StageState::QuitRequested() {
-    return quitRequested;
+    // executa o render em cada um dos objetos no objectArray
+    RenderArray();
 }
 
 void StageState::Start() {
-    LoadAssets();
-
-    for (unsigned i = 0; i < objectArray.size(); i++) {
-        if(objectArray[i].get()){
-            objectArray[i]->Start();
-        }
-        else{ // if null...
-            std::cout << "shared_ptr contains a null reference to a GameObject inside objectArray\n";
-        }
-    }
-
-    started = true;
-}
-
-std::weak_ptr<GameObject> StageState::AddObject(GameObject *go) {
-    std::shared_ptr<GameObject> sharedGO(go);
-
-    objectArray.push_back(sharedGO);
-
-    if(started){
-        go->Start();
-    }
-    return std::weak_ptr<GameObject>(sharedGO);
-}
-
-std::weak_ptr<GameObject> StageState::GetObjectPtr(GameObject *go) {
-    for(auto& it : objectArray){
-        if(it.get() == go){
-            return std::weak_ptr<GameObject>(it);
-        }
-    }
-
-    return std::weak_ptr<GameObject>();
+    // executa o start em cada um dos objetos no objectArray
+    StartArray();
 }
 
 

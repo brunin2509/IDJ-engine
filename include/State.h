@@ -12,7 +12,7 @@
 class State {
 public:
     State();
-    ~State();
+    virtual ~State();
 
     virtual void LoadAssets() = 0;
     virtual void Update(float dt) = 0;

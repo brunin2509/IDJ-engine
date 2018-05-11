@@ -12,28 +12,25 @@
 #include "SDL_include.h"
 #include "Sprite.h"
 #include "Music.h"
+#include "State.h"
 
-class StageState {
+class StageState : public State {
 public:
     StageState();
     ~StageState();
 
-    bool QuitRequested();
-    void LoadAssets();
-    void Update (float dt);
-    void Render();
+    void LoadAssets() override;
+    void Update (float dt) override;
+    void Render() override;
 
-    void Start();
-    std::weak_ptr<GameObject> AddObject(GameObject* go);
-    std::weak_ptr<GameObject> GetObjectPtr(GameObject* go);
+    void Start() override;
+    void Pause() override;
+    void Resume() override;
 
 private:
 
-    Music music;
-    bool quitRequested;
-    std::vector<std::shared_ptr<GameObject>> objectArray;
-
-    bool started;
+    TileSet* tileSet;
+    Music backgroundMusic;
 };
 
 
