@@ -44,11 +44,11 @@ void Alien::Start() {
     for(int i = 0; i < nMinions; i++){
         minionGO = new GameObject();
         minionInitialArc = i*2*PI/nMinions;
-        minion = new Minion(*minionGO, Game::GetInstance().GetState().GetObjectPtr(&associated), (float)minionInitialArc);
+        minion = new Minion(*minionGO, Game::GetInstance().GetCurrentState().GetObjectPtr(&associated), (float)minionInitialArc);
 
         minionGO->AddComponent(minion);
 
-        minionArray.push_back(Game::GetInstance().GetState().AddObject(minionGO));
+        minionArray.push_back(Game::GetInstance().GetCurrentState().AddObject(minionGO));
     }
 }
 
@@ -62,7 +62,7 @@ void Alien::Update(float dt) {
         explosionGO->AddComponent(explosionSound);
         explosionSound->Play();
         explosionGO->box.PlaceCenterAt(associated.box.Center());
-        Game::GetInstance().GetState().AddObject(explosionGO);
+        Game::GetInstance().GetCurrentState().AddObject(explosionGO);
 
         return;
     }

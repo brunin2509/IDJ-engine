@@ -13,11 +13,12 @@
 #include "Sprite.h"
 #include "Music.h"
 #include "State.h"
+#include "TileSet.h"
 
 class StageState : public State {
 public:
     StageState();
-    ~StageState();
+    ~StageState() override;
 
     void LoadAssets() override;
     void Update (float dt) override;
@@ -28,7 +29,6 @@ public:
     void Resume() override;
 
 private:
-
     TileSet* tileSet;
     Music backgroundMusic;
 };

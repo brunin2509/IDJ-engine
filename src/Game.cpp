@@ -118,6 +118,7 @@ void Game::Run() {
     }
 
     stateStack.emplace(storedState);
+    storedState->Start();
     storedState = nullptr;
 
     while(!stateStack.top()->QuitRequested() && !stateStack.empty()){
@@ -137,8 +138,8 @@ void Game::Run() {
 
         CalculateDeltaTime();
         InputManager::GetInstance().Update();
-        storedState->Update(dt);
-        storedState->Render();
+        stateStack.top()->Update(dt);
+        stateStack.top()->Render();
         SDL_RenderPresent(renderer);
         SDL_Delay(33);
     }

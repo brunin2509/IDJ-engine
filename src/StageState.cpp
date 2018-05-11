@@ -127,8 +127,18 @@ void StageState::Render() {
 }
 
 void StageState::Start() {
+    LoadAssets();
+
     // executa o start em cada um dos objetos no objectArray
     StartArray();
+}
+
+void StageState::Pause() {
+
+}
+
+void StageState::Resume() {
+
 }
 
 

@@ -78,7 +78,7 @@ void Minion::Shoot(Vec2 target) {
 
     bulletGO->box.PlaceCenterAt(associated.box.Center());
 
-    Game::GetInstance().GetState().AddObject(bulletGO);
+    Game::GetInstance().GetCurrentState().AddObject(bulletGO);
 }
 
 void Minion::NotifyCollision(GameObject &other) {
