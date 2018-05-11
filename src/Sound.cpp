@@ -14,7 +14,6 @@ Sound::Sound(GameObject &associated, std::string file) : Component(associated) {
 }
 
 Sound::~Sound() {
-    Mix_HaltChannel(channel);
 }
 
 void Sound::Play(int times) {
