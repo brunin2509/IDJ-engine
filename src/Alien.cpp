@@ -58,7 +58,7 @@ void Alien::Update(float dt) {
 
         auto explosionGO = new GameObject();
         auto explosionSound = new Sound(*explosionGO, "./assets/audio/boom.wav");
-        explosionGO->AddComponent(new Sprite(*explosionGO, "./assets/img/aliendeath.png", 4, 0.1, 1.6));
+        explosionGO->AddComponent(new Sprite(*explosionGO, "./assets/img/aliendeath.png", 4, 0.1, 0.4));
         explosionGO->AddComponent(explosionSound);
         explosionSound->Play();
         explosionGO->box.PlaceCenterAt(associated.box.Center());
