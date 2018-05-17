@@ -127,6 +127,9 @@ void Game::Run() {
             if(stateStack.top()){
                 stateStack.top()->Resume();
             }
+            else{
+                break;
+            }
         }
 
         if(storedState){

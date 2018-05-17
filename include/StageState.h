@@ -29,7 +29,6 @@ public:
     void Resume() override;
 
 private:
-    TileSet* tileSet;
     Music backgroundMusic;
 };
 

@@ -14,7 +14,9 @@ TileMap::TileMap(GameObject &associated, std::string file, TileSet *tileSet) : C
 }
 
 TileMap::~TileMap() {
-    delete tileSet;
+    if(tileSet){
+        delete tileSet;
+    }
     tileMatrix.clear();
 }
 

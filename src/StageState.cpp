@@ -34,7 +34,7 @@ StageState::StageState(): State(), backgroundMusic("./assets/audio/stageState.og
     auto mapGO = new GameObject();
     mapGO->box = {0,0};
 
-    tileSet = new TileSet(64, 64, "./assets/img/tileset.png");
+    auto tileSet = new TileSet(64, 64, "./assets/img/tileset.png");
     auto tileMap = new TileMap(*mapGO, ".assets/map/tileMap.txt", tileSet);
 
     mapGO->AddComponent(tileMap);
@@ -67,9 +67,6 @@ StageState::StageState(): State(), backgroundMusic("./assets/audio/stageState.og
 }
 
 StageState::~StageState() {
-    if(tileSet){
-        delete tileSet;
-    }
     objectArray.clear();
 }
 
@@ -82,8 +79,11 @@ void StageState::Update(float dt) {
     // atualiza a camera e a box do GameObject do mapa (lembrando novamente que o GO do mapa esta no indice 1)
     Camera::Update(dt);
 
-    // se apertar esc, seta o quitRequested
-    quitRequested =  inputManager.KeyPress(ESCAPE_KEY) || inputManager.QuitRequested();
+    // se fechar o jogo, seta o quitRequested
+    quitRequested =  inputManager.QuitRequested();
+
+    // se apertar esc, seta o popRequested
+    popRequested =  inputManager.KeyPress(ESCAPE_KEY);
 
     // executa o update em cada um dos objetos no objectArray
     UpdateArray(dt);
