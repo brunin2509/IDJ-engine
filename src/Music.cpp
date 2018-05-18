@@ -21,7 +21,7 @@ Music::~Music(){
 
 void Music::Play(int times) {
     if(music){
-        Mix_PlayMusic(music, times);
+        Mix_PlayMusic(music.get(), times);
     } else{
         cerr << "MUSIC COULD NOT BE PLAYED BECAUSE IT IS NULL";
         exit(1);

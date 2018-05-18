@@ -4,14 +4,15 @@
 
 #include "Resources.h"
 #include "Game.h"
+#include <memory>
 
-std::unordered_map<std::string, SDL_Texture*> Resources::imageTable;
-std::unordered_map<std::string, Mix_Music*> Resources::musicTable;
-std::unordered_map<std::string, Mix_Chunk*> Resources::soundTable;
+std::unordered_map<std::string, std::shared_ptr<SDL_Texture>> Resources::imageTable;
+std::unordered_map<std::string, std::shared_ptr<Mix_Music>> Resources::musicTable;
+std::unordered_map<std::string, std::shared_ptr<Mix_Chunk>> Resources::soundTable;
 
 using std::cerr;
 
-SDL_Texture *Resources::GetImage(std::string file) {
+std::shared_ptr<SDL_Texture> Resources::GetImage(std::string file) {
     auto search = imageTable.find(file);
 
     if(search != imageTable.end()){ // if the image is found...
@@ -25,21 +26,28 @@ SDL_Texture *Resources::GetImage(std::string file) {
             exit(1);
         }
 
-        imageTable[file] = texture;
+        std::shared_ptr<SDL_Texture> sharedTexture(texture, [] (SDL_Texture *p) -> void {
+            SDL_DestroyTexture(p);
+        });
 
-        return texture;
+        imageTable[file] = sharedTexture;
+
+        return sharedTexture;
     }
 }
 
 void Resources::ClearImages() {
-    for(auto it : imageTable){
-        SDL_DestroyTexture(it.second);
+    for(auto it = imageTable.begin(); it != imageTable.end();){
+        if((it->second).unique()){
+            it = imageTable.erase(it);
+        }
+        else{
+            it++;
+        }
     }
-
-    imageTable.clear();
 }
 
-Mix_Music *Resources::GetMusic(std::string file) {
+std::shared_ptr<Mix_Music> Resources::GetMusic(std::string file) {
     auto search = musicTable.find(file);
 
     if(search != musicTable.end()){ // if the music is found...
@@ -53,21 +61,28 @@ Mix_Music *Resources::GetMusic(std::string file) {
             exit(1);
         }
 
-        musicTable[file] = music;
+        std::shared_ptr<Mix_Music> sharedMusic(music, [] (Mix_Music *p) -> void {
+            Mix_FreeMusic(p);
+        });
 
-        return music;
+        musicTable[file] = sharedMusic;
+
+        return sharedMusic;
     }
 }
 
 void Resources::ClearMusics() {
-    for(auto it : musicTable){
-        Mix_FreeMusic(it.second);
+    for(auto it = musicTable.begin(); it != musicTable.end();){
+        if((it->second).unique()){
+            it = musicTable.erase(it);
+        }
+        else{
+            it++;
+        }
     }
-
-    musicTable.clear();
 }
 
-Mix_Chunk *Resources::GetSound(std::string file) {
+std::shared_ptr<Mix_Chunk> Resources::GetSound(std::string file) {
     auto search = soundTable.find(file);
 
     if(search != soundTable.end()){ // if the sound is found...
@@ -81,16 +96,23 @@ Mix_Chunk *Resources::GetSound(std::string file) {
             exit(1);
         }
 
-        soundTable[file] = sound;
+        std::shared_ptr<Mix_Chunk> sharedSound(sound, [] (Mix_Chunk *p) -> void {
+            Mix_FreeChunk(p);
+        });
 
-        return sound;
+        soundTable[file] = sharedSound;
+
+        return sharedSound;
     }
 }
 
 void Resources::ClearSounds() {
-    for(auto it : soundTable){
-        Mix_FreeChunk(it.second);
+    for(auto it = soundTable.begin(); it != soundTable.end();){
+        if((it->second).unique()){
+            it = soundTable.erase(it);
+        }
+        else{
+            it++;
+        }
     }
-
-    soundTable.clear();
 }

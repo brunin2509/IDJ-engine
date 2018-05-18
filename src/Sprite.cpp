@@ -43,7 +43,7 @@ void Sprite::Open(std::string file) {
         exit(1);
     }
 
-    SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
+    SDL_QueryTexture(texture.get(), nullptr, nullptr, &width, &height);
 
     SetClip(0, 0, width, height);
     this->associated.box.w = width;
@@ -64,7 +64,7 @@ void Sprite::Render(int x, int y) {
     dstRect.w = (int) (clipRect.w*scale.x);
     dstRect.h = (int) (clipRect.h*scale.y);
 
-    if(SDL_RenderCopyEx(Game::GetInstance().GetRenderer(), texture, &clipRect, &dstRect, associated.angleDeg, nullptr, SDL_FLIP_NONE) != 0){
+    if(SDL_RenderCopyEx(Game::GetInstance().GetRenderer(), texture.get(), &clipRect, &dstRect, associated.angleDeg, nullptr, SDL_FLIP_NONE) != 0){
         cerr << "SDL_RenderCopy RETURNED ERROR: " << SDL_GetError();
         exit(1);
     }

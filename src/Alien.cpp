@@ -35,7 +35,6 @@ Alien::~Alien(){
 }
 
 void Alien::Start() {
-    // WTFFFFFFFFFFF
     //auto game = Game::GetInstance();
     GameObject* minionGO = nullptr;
     Minion* minion = nullptr;

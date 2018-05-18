@@ -84,9 +84,7 @@ Game::~Game() {
         stateStack.pop();
     }
 
-    Resources::ClearImages();
-    Resources::ClearMusics();
-    Resources::ClearSounds();
+    ClearAllResources();
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
@@ -97,7 +95,7 @@ Game::~Game() {
 }
 
 State& Game::GetCurrentState() {
-    return *(stateStack.top());
+    return *((std::unique_ptr<State>&)stateStack.top());
 }
 
 SDL_Renderer* Game::GetRenderer() {
@@ -109,7 +107,6 @@ void Game::Push(State *state) {
 }
 
 void Game::Run() {
-//    LIXO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //    auto inputManager = InputManager::GetInstance();
 
     if(!storedState){
@@ -120,12 +117,15 @@ void Game::Run() {
     stateStack.emplace(storedState);
     storedState->Start();
     storedState = nullptr;
+    State *currentState = &GetCurrentState();
 
-    while(!stateStack.top()->QuitRequested() && !stateStack.empty()){
-        if(stateStack.top()->PopRequested()){
+    while(!currentState->QuitRequested() && !stateStack.empty()){
+        if(currentState->PopRequested()){
             stateStack.pop();
-            if(stateStack.top()){
-                stateStack.top()->Resume();
+            ClearAllResources();
+            if(!stateStack.empty()){
+                currentState = &GetCurrentState();
+                currentState->Resume();
             }
             else{
                 break;
@@ -133,23 +133,21 @@ void Game::Run() {
         }
 
         if(storedState){
-            stateStack.top()->Pause();
+            currentState->Pause();
+
             stateStack.emplace(storedState);
             storedState->Start();
             storedState = nullptr;
+            currentState = &GetCurrentState();
         }
 
         CalculateDeltaTime();
         InputManager::GetInstance().Update();
-        stateStack.top()->Update(dt);
-        stateStack.top()->Render();
+        currentState->Update(dt);
+        currentState->Render();
         SDL_RenderPresent(renderer);
         SDL_Delay(33);
     }
-
-    Resources::ClearImages();
-    Resources::ClearMusics();
-    Resources::ClearSounds();
 }
 
 void Game::CalculateDeltaTime() {
@@ -168,4 +166,10 @@ int Game::GetWidth() {
 
 int Game::GetHeight() {
     return height;
+}
+
+void Game::ClearAllResources() {
+    Resources::ClearImages();
+    Resources::ClearMusics();
+    Resources::ClearSounds();
 }

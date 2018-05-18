@@ -34,6 +34,8 @@ private:
 
     void CalculateDeltaTime();
 
+    void ClearAllResources();
+
     int frameStart;
     float dt;
 
