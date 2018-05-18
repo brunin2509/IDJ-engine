@@ -6,9 +6,12 @@
 #define T1_PROJECT_GAME_H
 
 #define INCLUDE_SDL
+#define INCLUDE_SDL_IMAGE
+#define INCLUDE_SDL_MIXER
+#define INCLUDE_SDL_TTF
 
-#include <stack>
 #include "SDL_include.h"
+#include <stack>
 #include "StageState.h"
 #include "State.h"
 

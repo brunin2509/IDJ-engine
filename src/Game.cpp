@@ -7,8 +7,7 @@
 #include <InputManager.h>
 #include "Resources.h"
 
-#define INCLUDE_SDL_IMAGE
-#define INCLUDE_SDL_MIXER
+
 
 using std::cerr;
 
@@ -72,6 +71,11 @@ Game::Game(std::string title, int width, int height) : frameStart(0), dt(0.0) {
         exit(1);
     }
 
+    if(TTF_Init() == -1){
+        cerr << "\n\n EXECUTION ERROR: TTF COULD NOT BE INITIALIZED: " << TTF_GetError();
+        exit(1);
+    }
+
     storedState = nullptr;
 }
 
@@ -86,6 +90,7 @@ Game::~Game() {
 
     ClearAllResources();
 
+    TTF_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     Mix_CloseAudio();
@@ -172,4 +177,5 @@ void Game::ClearAllResources() {
     Resources::ClearImages();
     Resources::ClearMusics();
     Resources::ClearSounds();
+    Resources::ClearFonts();
 }

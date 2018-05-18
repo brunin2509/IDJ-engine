@@ -18,7 +18,8 @@ Sprite::Sprite(GameObject &associated) :
         currentFrame(0),
         timeElapsed(0),
         frameTime(1),
-        selfDestructCount(0){
+        selfDestructCount(0),
+        secondsToSelfDestruct(0) {
 }
 
 Sprite::Sprite(GameObject &associated, std::string file, float secondsToSelfDestruct): Sprite(associated) {

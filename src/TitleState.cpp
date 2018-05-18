@@ -7,20 +7,25 @@
 #include <InputManager.h>
 #include <StageState.h>
 #include <Game.h>
+#include <Text.h>
+#include <Camera.h>
 #include "TitleState.h"
 
 TitleState::TitleState(): State() {
-    //
+    // criacao da imagem de titulo
     auto bgGO = new GameObject();
     bgGO->box = {0,0};
-
     auto bg = new Sprite(*bgGO, "./assets/img/title.jpg");
-    auto bgCamFollower = new CameraFollower(*bgGO);
-
     bgGO->AddComponent(bg);
-    bgGO->AddComponent(bgCamFollower);
-
     objectArray.emplace_back(bgGO);
+
+    // criacao do texto de "press to play"
+    auto textGO = new GameObject();
+    auto textColor = Text::GetSDLColor(255, 150, 0, 255);
+    auto text = new Text(*textGO, "./assets/font/Call me maybe.ttf", 60, Text::SOLID, "Press SPACE to play!", textColor, 0.7);
+    textGO->AddComponent(text);
+    textGO->box.PlaceCenterAt({Game::GetInstance().GetWidth()/2.0f, Game::GetInstance().GetHeight()/2.0f});
+    objectArray.emplace_back(textGO);
 }
 
 TitleState::~TitleState() {
@@ -61,5 +66,5 @@ void TitleState::Pause() {
 }
 
 void TitleState::Resume() {
-
+    Camera::pos = {0,0};
 }
