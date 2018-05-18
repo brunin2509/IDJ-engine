@@ -14,13 +14,13 @@
 
 int Alien::alienCount = 0;
 
-Alien::Alien(GameObject &associated, int nMinions):
+Alien::Alien(GameObject &associated, int nMinions, float timeOffset):
         Component(associated),
         speed(0,0),
         hp(ALIEN_INITIAL_HP),
         nMinions(nMinions),
         state(RESTING),
-        restTimer(0),
+        restTimer(timeOffset),
         destination(0,0) {
     associated.AddComponent(new Sprite(associated, "./assets/img/alien.png"));
     associated.AddComponent(new Collider(associated));

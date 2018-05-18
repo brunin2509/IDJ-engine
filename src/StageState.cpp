@@ -11,6 +11,9 @@
 #include <PenguinBody.h>
 #include <Collider.h>
 #include <Collision.h>
+#include <Game.h>
+#include <EndState.h>
+#include <GameData.h>
 #include "StageState.h"
 #include "TileMap.h"
 
@@ -44,14 +47,16 @@ StageState::StageState(): State(), backgroundMusic("./assets/audio/stageState.og
 
 
     // carrega um alien
-    auto alienGO = new GameObject();
+    for(int i = 0; i < NUM_OF_ALIENS; i++){
+        auto alienGO = new GameObject();
 
-    auto alien = new Alien(*alienGO, 3);
+        auto alien = new Alien(*alienGO, 3, (std::rand() % (ALIEN_RESTING_TIME*100))/100.f);
 
-    alienGO->AddComponent(alien);
-    alienGO->box.PlaceCenterAt({512,300});
+        alienGO->AddComponent(alien);
+        alienGO->box.PlaceCenterAt({float(std::rand() % 1408),float(std::rand() % 1280)});
 
-    objectArray.emplace_back(alienGO);
+        objectArray.emplace_back(alienGO);
+    }
 
 
     // carrega o penguin
@@ -118,6 +123,17 @@ void StageState::Update(float dt) {
             objectArray.erase(objectArray.begin() + i);
             i--;
         }
+    }
+
+    if(!PenguinBody::player){
+        GameData::playerVictory = false;
+        popRequested = true;
+        Game::GetInstance().Push(new EndState());
+    }
+    else if(Alien::alienCount == 0){
+        GameData::playerVictory = true;
+        popRequested = true;
+        Game::GetInstance().Push(new EndState());
     }
 }
 

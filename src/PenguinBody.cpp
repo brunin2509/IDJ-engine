@@ -88,7 +88,12 @@ void PenguinBody::Update(float dt) {
 
     if(abs(linearSpeed) > atrictSpeedLoss){
         linearSpeed -= (linearSpeed < 0)? -1*atrictSpeedLoss : atrictSpeedLoss;
-        associated.box += speed*linearSpeed*dt;
+        Rect newPos = associated.box + speed*linearSpeed*dt;
+
+        if(newPos.Center().x > PENGUIN_WALKING_LIMIT_X_MIN && newPos.Center().x < PENGUIN_WALKING_LIMIT_X_MAX
+                && newPos.Center().y > PENGUIN_WALKING_LIMIT_Y_MIN && newPos.Center().y < PENGUIN_WALKING_LIMIT_Y_MAX){
+            associated.box = newPos;
+        }
     }
     else{
         linearSpeed = 0;

@@ -16,6 +16,11 @@
 #define PENGUIN_ANGULAR_SPEED PI // em rads/s
 #define PENGUIN_INITIAL_HP 30
 
+#define PENGUIN_WALKING_LIMIT_X_MIN 0
+#define PENGUIN_WALKING_LIMIT_X_MAX 1408
+#define PENGUIN_WALKING_LIMIT_Y_MIN 0
+#define PENGUIN_WALKING_LIMIT_Y_MAX 1280
+
 class PenguinBody : public Component {
 public:
     explicit PenguinBody(GameObject& associated);

@@ -15,6 +15,8 @@
 #include "State.h"
 #include "TileSet.h"
 
+#define NUM_OF_ALIENS 3
+
 class StageState : public State {
 public:
     StageState();
